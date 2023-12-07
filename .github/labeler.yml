@@ -14,7 +14,8 @@ frontend:
 
 backend:
   - changed-files:
-      - any-glob-to-any-file: 'apps/gateway-api/**/*'
+      - any-glob-to-any-file:
+          - 'apps/gateway-api/**/*'
 
 entity:
   - changed-files:
@@ -43,3 +44,11 @@ Docker:
       - any-glob-to-any-file:
           - 'docker/**/*.yml'
           - 'apps/**/Dockerfile'
+
+# Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
+feature:
+  - head-branch: ['^feature', 'feature']
+
+# Add 'release' label to any PR that is opened against the `main` branch
+release:
+  - base-branch: 'main'
