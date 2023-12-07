@@ -102,4 +102,4 @@
 
 ## Continutous Integration
 
-- Github actions
+- GitHub actions
