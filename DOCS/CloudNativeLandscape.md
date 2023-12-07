@@ -77,6 +77,7 @@
 - influx data
 - weave scope
 - data dog
+- Sentry
 
 ## Logging
 
@@ -98,8 +99,7 @@
 ## Pipeline Orchestration
 
 - flux
-- jenkinsX
 
 ## Continutous Integration
 
-- Jenkins
+- Github actions
