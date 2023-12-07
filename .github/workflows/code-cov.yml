@@ -6,7 +6,6 @@ on:
       - master
   pull_request:
 
-
 jobs:
   code_coverage:
     name: Code Coverage
