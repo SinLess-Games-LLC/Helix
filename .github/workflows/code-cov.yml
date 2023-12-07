@@ -10,7 +10,6 @@ jobs:
   code_coverage:
     name: Code Coverage
     runs-on: ubuntu-latest
-    needs: main
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -30,7 +29,13 @@ jobs:
         run: npm ci
 
       - name: Run Nx test with code coverage
-        run: npx nx test --code-coverage
+        run: |
+          npx nx test gateway-api --code-coverage
+          npx nx test gateway-api-e2e --code-coverage
+          npx nx test frontend --code-coverage
+          npx nx test helix-utilities --code-coverage
+          npx nx test trpc --code-coverage
+          npx nx test shared-react-ui --code-coverage
 
       - name: Store code coverage report
         run: |
