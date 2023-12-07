@@ -1,29 +1,45 @@
 # .github/labeler.yml
 
-labels:
-  - name: frontend
-    pattern: 'apps/frontend/**/*'
+root:
+  - changed-files:
+      - any-glob-to-any-file: '*'
 
-  - name: frontend-e2e
-    pattern: 'apps/frontend-e2e/**/*'
+AnyChange:
+  - changed-files:
+      - any-glob-to-any-file: '**'
 
-  - name: gateway-api
-    pattern: 'apps/gateway-api/**/*'
+frontend:
+  - changed-files:
+      - any-glob-to-any-file: 'apps/frontend/**/*'
 
-  - name: gateway-api-e2e
-    pattern: 'apps/gateway-api-e2e/**/*'
+backend:
+  - changed-files:
+      - any-glob-to-any-file: 'apps/gateway-api/**/*'
 
-  - name: entities
-    pattern: 'libs/entities/**/*'
+entity:
+  - changed-files:
+      - any-glob-to-any-file: 'libs/entities/**/*'
 
-  - name: helix-utilities
-    pattern: 'libs/helix-utilities/**/*'
+shared-ui:
+  - changed-files:
+      - any-glob-to-any-file: 'libs/shared-react-ui/**/*'
 
-  - name: shared-react-ui
-    pattern: 'libs/shared-react-ui/**/*'
+Utilities:
+  - changed-files:
+      - any-glob-to-any-file: 'libs/helix-utilities/**/*'
 
-  - name: trpc
-    pattern: 'libs/trpc/**/*'
+e2e:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'apps/frontend-e2e/**/*'
+          - 'apps/gateway-api-e2e/**/*'
 
-  - name: Documentation
-    pattern: 'DOCS/**/*'
+Documentation:
+  - changed-files:
+      - any-glob-to-any-file: 'DOCS/**/*'
+
+Docker:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'docker/**/*.yml'
+          - 'apps/**/Dockerfile'
