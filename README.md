@@ -32,6 +32,7 @@
 
 ![GitHub](https://img.shields.io/github/license/SinLess-Games-LLC/Helix?style=for-the-badge)
 ![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/SinLess-Games-LLC/Helix/master?style=for-the-badge)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/SinLess-Games-LLC/Helix/nx-ci-pipeline.yml?style=for-the-badge&label=Nx%20Pipeline%20Status)
 
 #### Forks and Stars
 

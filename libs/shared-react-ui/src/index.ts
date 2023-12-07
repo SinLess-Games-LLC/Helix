@@ -1,1 +1,1 @@
-export * from './lib/shared-react-ui'
+export default { test: 'test' }
