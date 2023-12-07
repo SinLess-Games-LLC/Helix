@@ -7,6 +7,12 @@
     "typeorm": "^0.3.17",
     "uuid": "^9.0.1"
   },
+  "devDependencies": {
+    "@types/node": "18.14.2",
+    "ts-node": "10.9.1",
+    "typescript": "~5.2.2",
+    "eslint-config-prettier": "^9.0.0"
+  },
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts"

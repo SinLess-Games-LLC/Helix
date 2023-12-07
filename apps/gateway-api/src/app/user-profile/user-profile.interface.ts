@@ -1,10 +1,4 @@
-import {
-  Sex,
-  Sexuality,
-  Country,
-  Gender,
-  Pronoun,
-} from '@helix/entities'
+import { Sex, Sexuality, Country, Gender, Pronoun } from '@helix/entities'
 
 export interface UserProfile {
   firstName?: string

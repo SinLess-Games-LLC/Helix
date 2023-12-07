@@ -49,9 +49,7 @@ export class HelixConfiguration {
     this.twitch = this.loadTwitch()
   }
 
-  private convertToBoolean(
-    value: string | undefined,
-  ): boolean | undefined {
+  private convertToBoolean(value: string | undefined): boolean | undefined {
     if (value === 'true') {
       return true
     }
@@ -63,9 +61,7 @@ export class HelixConfiguration {
     }
   }
 
-  private processListOfIds(
-    value: string | undefined
-  ): number[] | undefined {
+  private processListOfIds(value: string | undefined): number[] | undefined {
     const unprocessed = value ? [value] : []
     const processed: number[] = []
 
@@ -86,9 +82,7 @@ export class HelixConfiguration {
     const api: ConfigApiInterface = {
       port: parseInt(process.env.API_PORT as string) || 3306,
       folder_enabled:
-        this.convertToBoolean(
-          process.env.API_FOLDER_ENABLED,
-        ) || false,
+        this.convertToBoolean(process.env.API_FOLDER_ENABLED) || false,
       jwt: { secret: process.env.API_JWT_SECRET || '' },
     }
     return api
@@ -206,15 +200,10 @@ export class HelixConfiguration {
     const logging: ConfigLoggingInterface = {
       location: {
         console: {
-          enabled:
-            this.convertToBoolean(
-              process.env.LOG_TO_CONSOLE,
-            ) || false,
+          enabled: this.convertToBoolean(process.env.LOG_TO_CONSOLE) || false,
         },
         file: {
-          enabled:
-            this.convertToBoolean(process.env.LOG_TO_FILE) ||
-            false,
+          enabled: this.convertToBoolean(process.env.LOG_TO_FILE) || false,
           path: process.env.LOG_FILE || 'app.log',
         },
       },
@@ -282,13 +271,8 @@ export class HelixConfiguration {
       },
       public_key: process.env.DISCORD_PUBLIC_KEY || '',
       developers:
-        this.processListOfIds(
-          process.env.DISCORD_DEVELOPER_IDS,
-        ) || [],
-      testers:
-        this.processListOfIds(
-          process.env.DISCORD_TESTER_IDS,
-        ) || [],
+        this.processListOfIds(process.env.DISCORD_DEVELOPER_IDS) || [],
+      testers: this.processListOfIds(process.env.DISCORD_TESTER_IDS) || [],
       oauth: {
         redirect_url: process.env.OAUTH2_REDIRECT_URL || '',
       },

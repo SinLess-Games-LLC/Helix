@@ -1,5 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types'
-import { Technology, TechCategory  } from '@helix/entities'
+import { Technology, TechCategory } from '@helix/entities'
 
 export class CreateTechnologyDto extends PartialType(Technology) {
   id: number
