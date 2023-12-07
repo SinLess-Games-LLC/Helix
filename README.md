@@ -36,8 +36,6 @@
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/SinLess-Games-LLC/Helix/label.yml?style=for-the-badge&label=Label%20PR%20workflow)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/SinLess-Games-LLC/Helix/codeql.yml?style=for-the-badge&label=CodeQL%20pipeline)
 
-
-
 #### Forks and Stars
 
 ![GitHub forks](https://img.shields.io/github/forks/SinLess-Games-LLC/Helix?style=for-the-badge)
