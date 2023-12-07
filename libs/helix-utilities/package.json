@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "dotenv": "^16.3.1",
-    "tslib": "^2.6.2",
-    "winston": "^3.11.0"
+    "tslib": "^2.6.2"
   },
   "type": "commonjs",
   "main": "./src/index.js",
