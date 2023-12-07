@@ -1,13 +1,5 @@
 # .github/labeler.yml
 
-root:
-  - changed-files:
-      - any-glob-to-any-file: '*'
-
-AnyChange:
-  - changed-files:
-      - any-glob-to-any-file: '**'
-
 frontend:
   - changed-files:
       - any-glob-to-any-file: 'apps/frontend/**/*'
@@ -45,10 +37,16 @@ Docker:
           - 'docker/**/*.yml'
           - 'apps/**/Dockerfile'
 
+Dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'package.json'
+          - '**/package.json'
+
 # Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
 feature:
   - head-branch: ['^feature', 'feature']
 
 # Add 'release' label to any PR that is opened against the `main` branch
 release:
-  - base-branch: 'main'
+  - base-branch: 'master'
