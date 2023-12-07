@@ -1,0 +1,29 @@
+# .github/labeler.yml
+
+labels:
+  - name: frontend
+    pattern: 'apps/frontend/**/*'
+
+  - name: frontend-e2e
+    pattern: 'apps/frontend-e2e/**/*'
+
+  - name: gateway-api
+    pattern: 'apps/gateway-api/**/*'
+
+  - name: gateway-api-e2e
+    pattern: 'apps/gateway-api-e2e/**/*'
+
+  - name: entities
+    pattern: 'libs/entities/**/*'
+
+  - name: helix-utilities
+    pattern: 'libs/helix-utilities/**/*'
+
+  - name: shared-react-ui
+    pattern: 'libs/shared-react-ui/**/*'
+
+  - name: trpc
+    pattern: 'libs/trpc/**/*'
+
+  - name: Documentation
+    pattern: 'DOCS/**/*'
