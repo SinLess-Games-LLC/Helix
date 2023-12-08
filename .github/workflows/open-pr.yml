@@ -43,4 +43,5 @@ jobs:
 
       - name: Create Pull Request
         run: |
+          branch_name=${GITHUB_REF#refs/heads/}
           gh pr create --base develop --head "${branch_name}" --title "${branch_name}" --body "This PR was automatically created by a GitHub Action."
