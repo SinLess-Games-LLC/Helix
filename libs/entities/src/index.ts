@@ -1,3 +1,24 @@
+import { Microservice } from './entities/microservice.entity'
+import { News } from './entities/news.entity'
+import { Technology } from './entities/technology.entity'
+import { User } from './entities/user.entity'
+import { UserProfile } from './entities/user-profile.entity'
+import { UserSetting } from './entities/user-setting.entity'
+import { Account } from './entities/account.entity'
+import { Session } from './entities/session.entity'
+
+let entities
+export default entities = [
+  Microservice,
+  News,
+  Technology,
+  User,
+  UserProfile,
+  UserSetting,
+  Account,
+  Session,
+]
+
 /**
  *  Entities
  */

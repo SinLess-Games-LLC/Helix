@@ -1,0 +1,57 @@
+{
+  "name": "discord-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/discord-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/discord-api",
+        "main": "apps/discord-api/src/main.ts",
+        "tsConfig": "apps/discord-api/tsconfig.app.json",
+        "assets": ["apps/discord-api/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/discord-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "discord-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "discord-api:build:development"
+        },
+        "production": {
+          "buildTarget": "discord-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/discord-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/discord-api/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
