@@ -30,12 +30,18 @@ jobs:
         run: |
           branch_name=${GITHUB_REF#refs/heads/}
           echo "Branch Name: $branch_name"
+          
+      - name: Debugging
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "List files in the current directory: $(ls -a)"
 
       - name: Install gh CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install gh
+        uses: actions/setup-gh@v2
+        with:
+          token: ${{ env.GH_TOKEN }}
 
       - name: Create Pull Request
         run: |
+          echo "Branch Name (before): $branch_name"
           gh pr create --base develop --head "${branch_name}" --title "${branch_name}" --body "This PR was automatically created by a GitHub Action."
