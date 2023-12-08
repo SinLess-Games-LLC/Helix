@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "prepare": "husky install",
     "format": "nx format:write --all",
     "pre-commit": "npm run format"
   },
