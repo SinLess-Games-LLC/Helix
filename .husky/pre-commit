@@ -9,5 +9,3 @@ npm run pre-commit
 echo '[Husky] | Running lint'
 npm run lint
 echo '[Husky] | Completed pre-commit hooks'
-
-
