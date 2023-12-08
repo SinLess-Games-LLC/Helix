@@ -8,7 +8,7 @@ In today's interconnected world, where information flows rapidly, and tasks span
 
 ### 1. Seamless Platform Integration
 
-Helix AI seamlessly integrates with a wide range of platforms, including Discord, Slack, Google, Facebook, Twitter, Stack Overflow, GitHub, and more. It meets you where you are, making interactions effortless.
+Helix AI seamlessly integrates with a wide range of platforms, including Discord, Slack, Google, Facebook, Twitter, GitHub, and more. It meets you where you are, making interactions effortless.
 
 ### 2. Intelligent AI Assistance
 

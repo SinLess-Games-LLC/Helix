@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '[Husky] | Running pre-commit hooks'
+echo '[Husky] | Running tests'
+npm test
+echo '[Husky] | Running pre-commit'
+npm run pre-commit
+echo '[Husky] | Running lint'
+npm run lint
+echo '[Husky] | Completed pre-commit hooks'
+
+

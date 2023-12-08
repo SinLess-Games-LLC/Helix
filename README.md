@@ -107,10 +107,9 @@ of immersion in modern games. To this, his roommate responded with a profound ch
 <br/>
 <br/>
 
-> **"Well, do something about it. You've identified a need in an industry. Now you have the power to fix it."**
->
+> **"Well, do something about it. You've identified a need in an industry. Now you have the power to fix it."** > <br/> <br/>
 > — Anonymous
-> <br/> > <br/>
+> <br/> <br/>
 > Intrigued and inspired by this insight, Timothy took the mantle upon himself and embarked on the mission to create SinLess Games LLC.
 > This fateful roommate would not only become a cherished friend but also a guiding light during the formative stages of the company.
 > Determined, Timothy embarked on the meticulous process of completing the essential paperwork to establish an LLC. After months of
