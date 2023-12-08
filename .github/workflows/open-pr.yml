@@ -3,12 +3,12 @@ name: Open Pull Request on Git-Flow Branch
 on:
   push:
     branches:
-      - 'feature/*' # Adjust the branch pattern based on your git-flow configuration
-      - 'bugfix/*' # Adjust the branch pattern based on your git-flow configuration
-      - 'hotfix/*' # Adjust the branch pattern based on your git-flow configuration
-      - 'release/*' # Adjust the branch pattern based on your git-flow configuration
-      - 'support/*' # Adjust the branch pattern based on your git-flow configuration
-      - 'develop' # Adjust the branch pattern based on your git-flow configuration
+      - 'feature/*'
+      - 'bugfix/*'
+      - 'hotfix/*'
+      - 'release/*'
+      - 'support/*'
+      - 'develop'
 
 env:
   GH_TOKEN: ${{ github.token }}
@@ -26,7 +26,15 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
+      - name: Print Commit History
+        run: git log --oneline --graph --decorate --all
+
+      - name: Install gh CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install gh
+
       - name: Create Pull Request
         run: |
-          branch_name=$(echo "${{ github.ref }}" | cut -d'/' -f 4)
+          branch_name=$(echo "${{ github.ref }}" | cut -d'/' -f 3)
           gh pr create --base develop --head "${branch_name}" --title "Merge ${branch_name} into develop" --body "This PR was automatically created by a GitHub Action."
