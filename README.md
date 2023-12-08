@@ -107,9 +107,7 @@ of immersion in modern games. To this, his roommate responded with a profound ch
 <br/>
 <br/>
 
-
-> **"Well, do something about it. You've identified a need in an industry. Now you have the power to fix it."**
-> <br/> <br/>
+> **"Well, do something about it. You've identified a need in an industry. Now you have the power to fix it."** > <br/> <br/>
 > — Anonymous
 > <br/> <br/>
 > Intrigued and inspired by this insight, Timothy took the mantle upon himself and embarked on the mission to create SinLess Games LLC.

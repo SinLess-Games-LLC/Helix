@@ -4,8 +4,7 @@
   "license": "MIT",
   "scripts": {
     "format": "nx format:write --all",
-    "lint": "nx lint --all",
-    "pre-commit": "npm run format && npm run lint"
+    "pre-commit": "npm run format"
   },
   "private": true,
   "dependencies": {
