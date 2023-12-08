@@ -3,7 +3,12 @@ name: Open Pull Request on Git-Flow Branch
 on:
   push:
     branches:
-      - 'refs/heads/develop/*' # Adjust the branch pattern based on your git-flow configuration
+      - 'feature/*' # Adjust the branch pattern based on your git-flow configuration
+      - 'bugfix/*' # Adjust the branch pattern based on your git-flow configuration
+      - 'hotfix/*' # Adjust the branch pattern based on your git-flow configuration
+      - 'release/*' # Adjust the branch pattern based on your git-flow configuration
+      - 'support/*' # Adjust the branch pattern based on your git-flow configuration
+      - 'develop' # Adjust the branch pattern based on your git-flow configuration
 
 jobs:
   open-pr:
