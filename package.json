@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "test": "nx affected --target=test",
+    "lint": "nx affected --target=lint",
     "prepare": "husky install",
     "format": "nx format:write --all",
     "pre-commit": "npm run format"
