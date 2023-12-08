@@ -10,6 +10,9 @@ on:
       - 'support/*' # Adjust the branch pattern based on your git-flow configuration
       - 'develop' # Adjust the branch pattern based on your git-flow configuration
 
+env:
+  GH_TOKEN: ${{ github.token }}
+
 jobs:
   open-pr:
     runs-on: ubuntu-latest
