@@ -87,7 +87,6 @@ possibilities of innovation are boundless.
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contributing](#contributing)
 - [Code Style Guidelines](CODE_STYLE_GUIDELINES.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
