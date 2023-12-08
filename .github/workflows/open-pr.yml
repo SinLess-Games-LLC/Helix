@@ -29,4 +29,4 @@ jobs:
       - name: Create Pull Request
         run: |
           branch_name=$(echo "${{ github.ref }}" | cut -d'/' -f 4)
-          gh pr create --base develop --head "${branch_name}" --title "Merge ${branch_name} into develop"
+          gh pr create --base develop --head "${branch_name}" --title "Merge ${branch_name} into develop" --body "This PR was automatically created by a GitHub Action."
