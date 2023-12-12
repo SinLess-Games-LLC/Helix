@@ -1,40 +1,48 @@
 import { Test, TestingModule } from '@nestjs/testing'
 
 import { AppController } from './app.controller'
-import { AppService, DiscordApiData } from './app.service'
+import { AppService } from './app.service'
+import { DiscordApiData } from './app.types'
+import { BotGateway } from './bot/bot.gateway'
+import { DiscordModule } from '@discord-nestjs/core'
+import { DiscordConfigService } from './bot/discord-config.service'
 
 describe('AppController', () => {
   let app: TestingModule
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
+      imports: [
+        DiscordModule.forRootAsync({
+          useClass: DiscordConfigService,
+        }),
+      ],
       controllers: [AppController],
-      providers: [AppService],
+      providers: [AppService, BotGateway],
     }).compile()
   })
 
   describe('getData', () => {
-    it('should return "Hello API"', () => {
+    it('should return data with proper structure"', async () => {
       const appController = app.get<AppController>(AppController)
-      expect(appController.getData() as DiscordApiData)
-      expect(appController.getData()).toHaveProperty(
-        'name',
-        'Helix Discord API'
-      )
-      expect(appController.getData()).toHaveProperty(
+      expect(appController.getData())
+      const data = (await appController.getData()) as DiscordApiData
+      expect(data).toHaveProperty('name', 'Helix Discord API')
+      expect(data).toHaveProperty(
         'description',
-        'This is a Discord API'
+        'This is the discord bot api for the Helix Discord Bot.'
       )
-      expect(appController.getData()).toHaveProperty('version', '1.0.0')
-      expect(appController.getData()).toHaveProperty('status', 'healthy')
-      expect(appController.getData()).toHaveProperty('uptime')
-      expect(appController.getData().uptime).toHaveProperty('raw')
-      expect(appController.getData().uptime).toHaveProperty('formatted')
-      expect(appController.getData()).toHaveProperty('metrics')
-      expect(appController.getData().metrics).toHaveProperty('cpuUsage')
-      expect(appController.getData().metrics).toHaveProperty('memory')
-      expect(appController.getData().metrics.memory).toHaveProperty('raw')
-      expect(appController.getData().metrics.memory).toHaveProperty('formatted')
+      expect(data).toHaveProperty('version', '1.0.0')
+      expect(data).toHaveProperty('apiStatus')
+      expect(data).toHaveProperty('botStatus')
+      expect(data.metrics).toHaveProperty('uptime')
+      expect(data.metrics.uptime).toHaveProperty('raw')
+      expect(data.metrics.uptime).toHaveProperty('formatted')
+      expect(data).toHaveProperty('metrics')
+      expect(data.metrics).toHaveProperty('cpuUsage')
+      expect(data.metrics).toHaveProperty('memory')
+      expect(data.metrics.memory).toHaveProperty('raw')
+      expect(data.metrics.memory).toHaveProperty('formatted')
     })
   })
 })

@@ -7,22 +7,36 @@ import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 
 import { AppModule } from './app/app.module'
-import { HelixLogger } from '@helix/helix-utilities'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 async function bootstrap() {
-  const logger = new HelixLogger({ name: 'DiscordApi', level: 'debug' })
+  const logger = new Logger('bootstrap')
 
-  logger.info('Starting Discord API')
-  logger.info('Configuring NestJS')
+  logger.log('Starting Discord API...')
+  logger.debug('Creating NestFactory...')
   const app = await NestFactory.create(AppModule)
-  logger.info('Setting Global Prefix')
+  logger.debug('NestFactory created.')
+  logger.debug('Setting global prefix...')
   const globalPrefix = 'api'
   app.setGlobalPrefix(globalPrefix)
-  logger.info('Starting Application')
-  const port = process.env.PORT || 3000
+  logger.debug('Global prefix set.')
+  logger.log('Starting application...')
+
+  const config = new DocumentBuilder()
+    .setTitle('Discord API')
+    .setDescription('The Discord API description')
+    .setVersion('1.0.0')
+    .build()
+
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('/api/docs', app, document)
+
+  logger.debug('Getting port...')
+  const port = process.env.PORT || 8001
+  logger.debug(`Port: ${port}`)
+  logger.debug('Listening...')
   await app.listen(port)
-  logger.info(`Application Started on Port: ${port}`)
-  Logger.log(
+  logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
   )
 }

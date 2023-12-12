@@ -1,0 +1,68 @@
+import { botColors, errCodes } from './bot.types'
+
+export const BotColors: botColors = {
+  bot: {
+    blue: '#022371',
+    pink: '#f6066f',
+  },
+  company: {
+    gold: '#daa520',
+    silver: '#d1cfd0',
+    black: '#000000',
+  },
+  system: {
+    critical: '#FF0000',
+    error: '#EE4B2B',
+    warning: '#FFEA00',
+    info: '#0000FF',
+    success: '#00ff00',
+  },
+}
+
+export const ErrCodes: errCodes = {
+  System: {
+    api: {},
+    database: {},
+    gateway: {},
+    dashboard: {},
+    discord: {},
+    discordApi: {},
+    discordBot: {},
+  },
+  Bot: {
+    AFK: {},
+    ActionLog: {},
+    Announcements: {},
+    AntiRaid: {},
+    AntiSpam: {},
+    AutoBan: {},
+    AutoMessage: {},
+    AutoMod: {},
+    AutoPurge: {},
+    AutoResponder: {},
+    AutoRoles: {},
+    Forms: {},
+    Giveaways: {},
+    Highlights: {},
+    Leveling: {},
+    Logging: {},
+    MessageEmbedder: {},
+    Moderation: {},
+    Music: {},
+    Polls: {},
+    Protection: {},
+    ReactionRoles: {},
+    Reddit: {},
+    SlowMode: {},
+    Starboard: {},
+    Suggestions: {},
+    Tags: {},
+    TemporaryChannels: {},
+    Tickets: {},
+    Tupper: {},
+    Twitch: {},
+    Utility: {},
+    Welcome: {},
+    Youtube: {},
+  },
+}

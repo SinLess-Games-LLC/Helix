@@ -7,6 +7,10 @@ import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { HelixConfiguration } from '@helix/helix-utilities'
 import entities from '@helix/entities'
+import { BotModule } from './bot/bot.module'
+import { DiscordModule } from '@discord-nestjs/core'
+import { DiscordConfigService } from './bot/discord-config.service'
+import { BotGateway } from './bot/bot.gateway'
 
 const config = new HelixConfiguration()
 
@@ -39,10 +43,12 @@ const config = new HelixConfiguration()
         },
       },
     }),
+    DiscordModule.forFeature(),
     TypeOrmModule.forFeature(entities),
     TrpcModule,
+    BotModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, BotGateway],
 })
 export class AppModule {}

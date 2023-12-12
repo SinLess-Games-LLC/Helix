@@ -13,6 +13,7 @@ import { ConfigGithubInterface } from './interfaces/Github.interface'
 import { ConfigGoogleInterface } from './interfaces/Google.interface'
 import { ConfigOpenAiInterface } from './interfaces/OpenAi.interface'
 import { ConfigTwitchInterface } from './interfaces/Twitch.interface'
+import { ConfigLavalinkInterface } from './interfaces/Lavalink.interface'
 
 dotenv.config()
 
@@ -31,6 +32,7 @@ export class HelixConfiguration {
   public readonly google: ConfigGoogleInterface
   public readonly open_ai: ConfigOpenAiInterface
   public readonly twitch: ConfigTwitchInterface
+  private lavalink: ConfigLavalinkInterface
 
   constructor() {
     this.api = this.loadApi()
@@ -39,6 +41,7 @@ export class HelixConfiguration {
     this.elastic = this.loadElastic()
     this.general = this.loadGeneral()
     this.logging = this.loadLogging()
+    this.lavalink = this.loadLavalink()
     this.next = this.loadNext()
     this.message = this.loadMessage()
     this.auth0 = this.loadAuth0()
@@ -317,5 +320,14 @@ export class HelixConfiguration {
       },
     }
     return twitch
+  }
+
+  private loadLavalink() {
+    const lavalink: ConfigLavalinkInterface = {
+      host: process.env.LAVALINK_SERVER_HOST || 'localhost',
+      port: parseInt(process.env.LAVALINK_SERVER_PORT) || 2333,
+      password: process.env.LAVALINK_SERVER_PASSWORD || '',
+    }
+    return lavalink
   }
 }

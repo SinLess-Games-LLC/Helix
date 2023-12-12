@@ -1,5 +1,3 @@
-// import { Chalk, ChalkInstance } from 'chalk'
-
 export type logLevel =
   | 'critical'
   | 'error'
@@ -15,19 +13,18 @@ export interface LoggerOptions {
 }
 
 export enum loggerColors {
-  critical = '\u001b[31m', // red
-  warning = '\u001b[33m', // yellow
-  success = '\u001b[32m', // green
-  info = '\u001b[34m', // blue
-  debug = '\u001b[36m', // cyan
-  trace = '\u001b[35m', // magenta
-  message = '\u001b[37m', // white
+  critical = '\u001b[31m',
+  warning = '\u001b[33m',
+  success = '\u001b[32m',
+  info = '\u001b[34m',
+  debug = '\u001b[36m',
+  trace = '\u001b[35m',
+  message = '\u001b[37m',
 }
 
 export class HelixLogger {
   private level: logLevel | undefined
-  private name: string | undefined
-  // private chalk: ChalkInstance = new Chalk()
+  private readonly name: string | undefined
   constructor(options: LoggerOptions) {
     this.name = options.name
     this.level = options.level
@@ -41,37 +38,53 @@ export class HelixLogger {
     switch (level) {
       case 'critical':
         console.log(
-          `${loggerColors.critical}[${this.name}] | [CRITICAL] | ${loggerColors.message}${message}`
+          `${
+            loggerColors.critical
+          }[${this.name?.toUpperCase()}] | [CRITICAL] | ${
+            loggerColors.message
+          }${message}`
         )
         break
       case 'error':
         console.log(
-          `${loggerColors.critical}[${this.name}] | [ERROR] | ${loggerColors.message}${message}`
+          `${loggerColors.critical}[${this.name?.toUpperCase()}] | [ERROR] | ${
+            loggerColors.message
+          }${message}`
         )
         break
       case 'warning':
         console.log(
-          `${loggerColors.warning}[${this.name}] | [WARNING] | ${loggerColors.message}${message}`
+          `${loggerColors.warning}[${this.name?.toUpperCase()}] | [WARNING] | ${
+            loggerColors.message
+          }${message}`
         )
         break
       case 'success':
         console.log(
-          `${loggerColors.success}[${this.name}] | [SUCCESS] | ${loggerColors.message}${message}`
+          `${loggerColors.success}[${this.name?.toUpperCase()}] | [SUCCESS] | ${
+            loggerColors.message
+          }${message}`
         )
         break
       case 'info':
         console.log(
-          `${loggerColors.info}[${this.name}] | [INFO] | ${loggerColors.message}${message}`
+          `${loggerColors.info}[${this.name?.toUpperCase()}] | [INFO] | ${
+            loggerColors.message
+          }${message}`
         )
         break
       case 'debug':
         console.log(
-          `${loggerColors.debug}[${this.name}] | [DEBUG] | ${loggerColors.message}${message}`
+          `${loggerColors.debug}[${this.name?.toUpperCase()}] | [DEBUG] | ${
+            loggerColors.message
+          }${message}`
         )
         break
       case 'trace':
         console.log(
-          `${loggerColors.trace}[${this.name}] | [TRACE] | ${loggerColors.message}${message}`
+          `${loggerColors.trace}[${this.name?.toUpperCase()}] | [TRACE] | ${
+            loggerColors.message
+          }${message}`
         )
         break
     }
