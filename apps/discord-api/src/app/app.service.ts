@@ -1,13 +1,19 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { DiscordApiData } from './app.types'
 import { BotGateway } from './bot/bot.gateway'
+import { InjectDiscordClient } from './discord'
+import { HelixClient } from './bot/bot.client'
 
 @Injectable()
 export class AppService {
-  public apiIsHealthy: boolean = true
+  public isApiHealthy: boolean = true
   private logger: Logger
 
-  constructor(private readonly botGateway: BotGateway) {
+  constructor(
+    @InjectDiscordClient()
+    private readonly client: HelixClient,
+    private readonly botGateway: BotGateway
+  ) {
     this.logger = new Logger('AppService')
   }
 
@@ -52,16 +58,16 @@ export class AppService {
   }
 
   public setApiHealth(health: boolean) {
-    this.logger.debug(`Setting apiIsHealthy to ${health}...`)
-    this.apiIsHealthy = health
-    this.logger.debug(`apiIsHealthy set to ${this.apiIsHealthy}.`)
-    return this.apiIsHealthy
+    this.logger.debug(`Setting isApiHealthy to ${health}...`)
+    this.isApiHealthy = health
+    this.logger.debug(`isApiHealthy set to ${this.isApiHealthy}.`)
+    return this.isApiHealthy
   }
 
   public getApiHealth() {
-    this.logger.debug(`Getting apiIsHealthy...`)
-    this.logger.debug(`apiIsHealthy: ${this.apiIsHealthy}`)
-    return this.apiIsHealthy
+    this.logger.log(`Getting isApiHealthy...`)
+    this.logger.debug(`isApiHealthy: ${this.isApiHealthy}`)
+    return this.isApiHealthy
   }
 
   public getCpuUsagePercentage(): number {
@@ -87,14 +93,83 @@ export class AppService {
     return (elapsedCpuTime / elapsedRealTime) * 100
   }
 
+  public getOverallHealth() {
+    if (
+      this.getApiHealth() &&
+      this.botGateway.getBotHealth() &&
+      this.client.getClientHealth()
+    ) {
+      return true
+    }
+    if (
+      !this.getApiHealth() ||
+      !this.botGateway.getBotHealth() ||
+      !this.client.getClientHealth()
+    ) {
+      return false
+    }
+    if (
+      this.getApiHealth() &&
+      !this.botGateway.getBotHealth() &&
+      !this.client.getClientHealth()
+    ) {
+      return false
+    }
+    if (
+      !this.getApiHealth() &&
+      this.botGateway.getBotHealth() &&
+      !this.client.getClientHealth()
+    ) {
+      return false
+    }
+    if (
+      !this.getApiHealth() &&
+      !this.botGateway.getBotHealth() &&
+      this.client.getClientHealth()
+    ) {
+      return false
+    }
+    if (
+      this.getApiHealth() &&
+      this.botGateway.getBotHealth() &&
+      !this.client.getClientHealth()
+    ) {
+      return false
+    }
+    if (
+      this.getApiHealth() &&
+      !this.botGateway.getBotHealth() &&
+      this.client.getClientHealth()
+    ) {
+      return false
+    }
+    if (
+      !this.getApiHealth() &&
+      this.botGateway.getBotHealth() &&
+      this.client.getClientHealth()
+    ) {
+      return false
+    }
+  }
+
   public async getData(): Promise<DiscordApiData> {
     this.logger.debug('Getting data from /api ...')
     return {
       name: 'Helix Discord API',
       description: 'This is the discord bot api for the Helix Discord Bot.',
       version: '1.0.0',
-      apiStatus: this.getApiHealth() ? 'healthy' : 'unhealthy',
-      botStatus: this.botGateway.getBotHealth() ? 'healthy' : 'unhealthy',
+      overallHealth: this.getOverallHealth() ? 'healthy' : 'unhealthy',
+      statuses: {
+        apiStatus: this.getApiHealth() ? 'healthy' : 'unhealthy',
+        botStatus: this.botGateway.getBotHealth() ? 'healthy' : 'unhealthy',
+        discordStatus: this.client.getDiscordHealth() ? 'healthy' : 'unhealthy',
+        botClientStatus: this.client.getClientHealth()
+          ? 'healthy'
+          : 'unhealthy',
+        cloudflareStatus: this.client.getCloudflareHealth()
+          ? 'healthy'
+          : 'unhealthy',
+      },
       metrics: {
         uptime: {
           raw: process.uptime(),

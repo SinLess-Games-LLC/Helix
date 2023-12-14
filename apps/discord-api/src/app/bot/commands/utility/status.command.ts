@@ -1,4 +1,4 @@
-import { Command, Handler } from '@discord-nestjs/core'
+import { Command, Handler, InjectDiscordClient } from '../../../discord'
 import { ColorResolvable, EmbedBuilder, Message } from 'discord.js'
 import { Injectable, Logger } from '@nestjs/common'
 import { BotColors } from '../../bot.constants'
@@ -6,6 +6,7 @@ import { botColors } from '../../bot.types'
 import axios from 'axios'
 import { AppService } from '../../../app.service'
 import { BotGateway } from '../../bot.gateway'
+import { HelixClient } from '../../bot.client'
 
 @Command({
   name: 'status',
@@ -18,7 +19,9 @@ export class StatusCommand {
 
   constructor(
     private readonly appService: AppService,
-    private readonly BotGateway: BotGateway
+    private readonly BotGateway: BotGateway,
+    @InjectDiscordClient()
+    private readonly client: HelixClient
   ) {
     this.botColors = BotColors
     this.logger = new Logger(StatusCommand.name)
@@ -40,6 +43,7 @@ export class StatusCommand {
 
   @Handler()
   async onStatus(message: Message) {
+    const cloudflareStatus = this.client.getCloudflareHealth()
     const discordStatus = await this.fetchDiscordApiStatus()
     const apiStatus = this.appService.getApiHealth()
     const botStatus = this.BotGateway.getBotHealth()
@@ -137,13 +141,24 @@ export class StatusCommand {
     em.setFields(
       { name: 'Discord Status', value: `${discordStatus}`, inline: true },
       {
+        name: 'Cloudflare Status',
+        value: `${cloudflareStatus ? 'healthy' : 'unhealthy'}`,
+        inline: true,
+      },
+      {
         name: 'Helix Bot API Status',
         value: `${apiStatus ? 'healthy' : 'unhealthy'}`,
         inline: true,
       },
+      { name: '\n\n', value: `\n\n` },
       {
         name: 'Helix Bot Status',
         value: `${botStatus ? 'healthy' : 'unhealthy'}`,
+        inline: true,
+      },
+      {
+        name: 'Helix Bot Client Status',
+        value: `${this.client.getClientHealth() ? 'healthy' : 'unhealthy'}`,
         inline: true,
       },
       {
@@ -151,6 +166,7 @@ export class StatusCommand {
         value: `${await this.appService.getUptime()}`,
         inline: true,
       },
+      { name: '\n\n', value: `\n\n` },
       {
         name: 'Memory Usage',
         value: `${this.appService.formatMemory(

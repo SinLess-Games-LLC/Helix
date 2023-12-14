@@ -1,10 +1,7 @@
 /* discord-config.service.ts */
 
 import { Injectable } from '@nestjs/common'
-import {
-  DiscordModuleOption,
-  DiscordOptionsFactory,
-} from '@discord-nestjs/core'
+import { DiscordModuleOption, DiscordOptionsFactory } from '../discord'
 import { IntentsBitField } from 'discord.js'
 import { HelixConfiguration } from '@helix/helix-utilities'
 

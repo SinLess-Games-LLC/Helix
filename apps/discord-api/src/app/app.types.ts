@@ -29,11 +29,19 @@ interface Metrics {
   memory: MemoryMetrics
 }
 
+interface Status {
+  apiStatus: string
+  botStatus: string
+  discordStatus: string
+  botClientStatus: string
+  cloudflareStatus: string
+}
+
 export interface DiscordApiData {
   name: string
   description: string
   version: string
-  apiStatus: string
-  botStatus: string
+  overallHealth: string
+  statuses: Status
   metrics: Metrics
 }

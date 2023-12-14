@@ -8,8 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { HelixConfiguration } from '@helix/helix-utilities'
 import entities from '@helix/entities'
 import { BotModule } from './bot/bot.module'
-import { DiscordModule } from '@discord-nestjs/core'
-import { DiscordConfigService } from './bot/discord-config.service'
+import { DiscordModule } from './discord'
 import { BotGateway } from './bot/bot.gateway'
 
 const config = new HelixConfiguration()

@@ -23,9 +23,50 @@ export type errCodes = {
     database: null
     gateway: null
     dashboard: null
-    discord: null
+    discord: {
+      API_DOWN: number
+      CLOUDFLARE_DOWN: number
+      BRAZIL_DOWN: number
+      ROTTERDAM_DOWN: number
+      MEDIA_PROXY_DOWN: number
+      TAX_CALCULATION_SERVICE_DOWN: number
+      HONG_KONG_DOWN: number
+      CREATOR_PAYOUTS_DOWN: number
+      GATEWAY_DOWN: number
+      PUSH_NOTIFICATIONS_DOWN: number
+      INDIA_DOWN: number
+      JAPAN_DOWN: number
+      SEARCH_DOWN: number
+      VOICE_DOWN: number
+      RUSSIA_DOWN: number
+      SINGAPORE_DOWN: number
+      THIRD_PARTY_DOWN: number
+      SOUTH_AFRICA_DOWN: number
+      SERVER_WEB_PAGES_DOWN: number
+      SOUTH_KOREA_DOWN: number
+      PAYMENTS_DOWN: number
+      SYDNEY_DOWN: number
+      US_CENTRAL_DOWN: number
+      US_EAST_DOWN: number
+      US_SOUTH_DOWN: number
+      US_WEST_DOWN: number
+    }
     discordApi: null
     discordBot: null
+    cloudflare: {
+      SITES_AND_SERVICES_DOWN: number
+      ACCESS_DOWN: number
+      ALWAYS_ONLINE_DOWN: number
+      ANALYTICS_DOWN: number
+      API_DOWN: number
+      API_SHIELD_DOWN: number
+      DASHBOARD_DOWN: number
+      DEVELOPERS_DOWN: number
+      AUTHORITATIVE_DNS_DOWN: number
+      DNS_ROOT_SERVERS_DOWN: number
+      DNS_UPDATES_DOWN: number
+      RECURSIVE_DNS_DOWN: number
+    }
   }
   Bot: {
     AFK: null
@@ -62,5 +103,49 @@ export type errCodes = {
     Utility: null
     Welcome: null
     Youtube: null
+  }
+}
+
+interface Page {
+  id: string
+  name: string
+  url: string
+  time_zone: string
+  updated_at: string
+}
+
+interface Component {
+  id: string
+  name: string
+  status: string
+  created_at: string
+  updated_at: string
+  position: number
+  description: string | null
+  showcase: boolean
+  start_date: string | null
+  group_id: string | null
+  page_id: string
+  group: boolean
+  only_show_if_degraded: boolean
+  components?: string[] // If it has nested components
+}
+
+export interface StatusResponse {
+  page: Page
+  components: Component[]
+  incidents: any[] // You might want to create a type for incidents as well
+  scheduled_maintenances: any[] // Similarly, create a type for scheduled_maintenances
+  status: {
+    indicator: string
+    description: string
+  }
+}
+
+export interface MinimalStatusResponse {
+  page: Page
+  status: {
+    indicator: string
+    description: string
   }
 }

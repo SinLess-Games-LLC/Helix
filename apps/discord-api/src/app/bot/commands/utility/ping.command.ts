@@ -1,10 +1,5 @@
-import { Command, Handler } from '@discord-nestjs/core'
-import {
-  ColorResolvable,
-  CommandInteraction,
-  EmbedBuilder,
-  Message,
-} from 'discord.js'
+import { Command, Handler } from '../../../discord'
+import { ColorResolvable, EmbedBuilder, Message } from 'discord.js'
 import { Injectable, Logger } from '@nestjs/common'
 import { BotColors } from '../../bot.constants'
 import { botColors } from '../../bot.types'

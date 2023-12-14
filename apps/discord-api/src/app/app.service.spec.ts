@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { AppService } from './app.service'
 import { BotGateway } from './bot/bot.gateway'
-import { DiscordModule } from '@discord-nestjs/core'
+import { DiscordModule } from './discord'
 import { DiscordConfigService } from './bot/discord-config.service'
 
 describe('AppService', () => {
@@ -24,14 +24,22 @@ describe('AppService', () => {
     it('should return data with proper structure', async () => {
       const data = await appService.getData()
 
+      // app
       expect(data).toHaveProperty('name', 'Helix Discord API')
       expect(data).toHaveProperty(
         'description',
         'This is the discord bot api for the Helix Discord Bot.'
       )
       expect(data).toHaveProperty('version', '1.0.0')
-      expect(data).toHaveProperty('apiStatus')
-      expect(data).toHaveProperty('botStatus')
+
+      // health
+      expect(data).toHaveProperty('overallHealth')
+      expect(data).toHaveProperty('statuses')
+      expect(data.statuses).toHaveProperty('apiStatus')
+      expect(data.statuses).toHaveProperty('botStatus')
+      expect(data.statuses).toHaveProperty('botClientStatus')
+
+      // metrics
       expect(data).toHaveProperty('metrics')
       expect(data.metrics).toHaveProperty('uptime')
       expect(data.metrics.uptime).toHaveProperty('raw')
