@@ -1,9 +1,4 @@
-import {
-  ColorResolvable,
-  EmbedBuilder,
-  Interaction,
-  SlashCommandBuilder,
-} from 'discord.js'
+import { ColorResolvable, EmbedBuilder, Interaction, SlashCommandBuilder } from 'discord.js'
 import { CommandGroup } from '../../enums/command.group.enum'
 import { HelixClient } from '../../utils/helix.client'
 
