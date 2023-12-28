@@ -18,9 +18,9 @@ async function bootstrap() {
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`)
 }
 
-bootstrap().then(() =>
-  Logger.log('🚀 Application bootstrapped', 'Bootstrap')
-). catch((err) => {
-  Logger.error(err)
-  process.exit(1)
-})
+bootstrap()
+  .then(() => Logger.log('🚀 Application bootstrapped', 'Bootstrap'))
+  .catch(err => {
+    Logger.error(err)
+    process.exit(1)
+  })

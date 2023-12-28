@@ -3,7 +3,6 @@ import * as trpcExpress from '@trpc/server/adapters/express'
 import { userRouter } from './User.route'
 import { TrpcService } from '@helix/trpc'
 
-
 @Injectable()
 export class TrpcRouter {
   constructor(

@@ -1,9 +1,4 @@
-import {
-  Column,
-  Entity,
-  EntityRepository,
-  Repository,
-} from 'typeorm'
+import { Column, Entity, EntityRepository, Repository } from 'typeorm'
 import { BaseEntity } from './base.entity'
 
 @Entity()
