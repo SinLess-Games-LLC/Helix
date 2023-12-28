@@ -2,6 +2,7 @@ declare namespace NodeJS {
   interface ProcessEnv {
     ADMIN_PASSWORD: string
     ADMIN_USERNAME: string
+    API_ENABLED: string
     API_FOLDER_ENABLED: string
     API_JWT_SECRET: string
     API_PORT: string
@@ -14,6 +15,7 @@ declare namespace NodeJS {
     AUTH0_SCOPE: string
     AUTH0_SECRET: string
     AUTHOR_NAME: string
+    BOT_OWNER_ID: string
     CONFIG_VERSION: string
     CONSUL_HOST: string
     CONSUL_PORT: string
@@ -22,6 +24,8 @@ declare namespace NodeJS {
     CONSUL_USERNAME: string
     DEBUG: string
     DEBUG_LEVEL: string
+    DISCORD_API_PORT: string
+    DISCORD_API_SECRET: string
     DISCORD_APPLICATION_ID: string
     DISCORD_BOT_DEFAULT_PREFIX: string
     DISCORD_BOT_INVITE_URL: string
@@ -37,6 +41,7 @@ declare namespace NodeJS {
     ELASTICSEARCH_PORT: string
     ELASTICSEARCH_USERNAME: string
     GITHUB_ID: string
+    GITHUB_REMOTE_REPO: string
     GITHUB_SECRET: string
     GOOGLE_CLIENT_ID
     GOOGLE_CLIENT_SECRET

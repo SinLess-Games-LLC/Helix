@@ -41,10 +41,7 @@ export class Microservice {
   @Column()
   alt: string | undefined
 
-  @ManyToOne(
-    () => UserProfile,
-    (userProfile) => userProfile.microservices_added
-  )
+  @ManyToOne(() => UserProfile, userProfile => userProfile.microservices_added)
   added_by: number | undefined
 
   @Column({ unique: true, default: '' })
@@ -57,7 +54,7 @@ export class Microservice {
   createdAt: Date | undefined
 
   @BeforeInsert()
-  async generateSlug() {
+  generateSlug() {
     if (typeof this.name === 'string') {
       this.slug = slugify(this.name, '_')
     }

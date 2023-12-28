@@ -4,6 +4,7 @@
  * @interface ConfigApiInterface
  */
 export interface ConfigApiInterface {
+  enabled: boolean
   /**
    * The port on which the API will run.
    *

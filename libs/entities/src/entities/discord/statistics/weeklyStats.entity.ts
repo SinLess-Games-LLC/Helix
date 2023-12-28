@@ -18,10 +18,10 @@ export class DiscordWeeklyStatistics {
   @Column()
   week: number | undefined
 
-  @OneToMany(() => DiscordDailyStatistics, (dailyStats) => dailyStats.week)
+  @OneToMany(() => DiscordDailyStatistics, dailyStats => dailyStats.week)
   dailyStats: DiscordDailyStatistics[] | undefined
 
-  @ManyToOne(() => DiscordMonthlyStatistics, (month) => month.weeklyStats)
+  @ManyToOne(() => DiscordMonthlyStatistics, month => month.weeklyStats)
   month: DiscordMonthlyStatistics | undefined
 
   @UpdateDateColumn()

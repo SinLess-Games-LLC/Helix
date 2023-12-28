@@ -43,10 +43,7 @@ export class DiscordDailyStatistics {
   @Column()
   bots: number | undefined
 
-  @ManyToOne(
-    () => DiscordWeeklyStatistics,
-    (weeklyStats) => weeklyStats.dailyStats
-  )
+  @ManyToOne(() => DiscordWeeklyStatistics, weeklyStats => weeklyStats.dailyStats)
   week: DiscordWeeklyStatistics | undefined
 
   @UpdateDateColumn()

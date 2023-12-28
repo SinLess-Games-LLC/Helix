@@ -3,7 +3,6 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToMany,
   ValueTransformer,
 } from 'typeorm'
 import { User } from './user.entity'
@@ -33,6 +32,6 @@ export class Session {
   @Column({ transformer: transformer.date })
   expires!: string
 
-  @ManyToOne(() => User, (user) => user.sessions)
+  @ManyToOne(() => User, user => user.sessions)
   user!: User
 }

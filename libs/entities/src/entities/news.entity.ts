@@ -43,7 +43,7 @@ export class News {
   @Column()
   slug: string | undefined
 
-  @ManyToOne(() => UserProfile, (userProfile) => userProfile.news_added, {
+  @ManyToOne(() => UserProfile, userProfile => userProfile.news_added, {
     cascade: true,
   })
   added_by: number | undefined
@@ -55,7 +55,7 @@ export class News {
   created_at: Date | undefined
 
   @BeforeInsert()
-  async slugify() {
+  slugify() {
     if (typeof this.name === 'string') {
       this.slug = slugify(this.name, '_')
     }

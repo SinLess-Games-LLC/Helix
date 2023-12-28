@@ -18,10 +18,7 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/helix-utilities/**/*.ts",
-          "libs/helix-utilities/package.json"
-        ]
+        "lintFilePatterns": ["libs/helix-utilities/**/*.ts", "libs/helix-utilities/package.json"]
       }
     },
     "test": {

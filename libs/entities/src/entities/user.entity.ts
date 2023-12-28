@@ -87,10 +87,10 @@ export class User {
   @JoinColumn({ name: 'settings_id', referencedColumnName: 'id' })
   settings: UserSetting | undefined
 
-  @OneToMany(() => Session, (session) => session.userId)
+  @OneToMany(() => Session, session => session.userId)
   sessions!: Session[]
 
-  @OneToMany(() => Account, (account) => account.userId)
+  @OneToMany(() => Account, account => account.userId)
   accounts!: Account[]
 
   @UpdateDateColumn()

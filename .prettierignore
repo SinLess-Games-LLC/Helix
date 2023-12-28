@@ -3,3 +3,11 @@
 /coverage
 /.nx/cache
 .angular
+
+# Folders
+/.cache
+/.git
+/docs
+/misc
+/node_modules
+/temp

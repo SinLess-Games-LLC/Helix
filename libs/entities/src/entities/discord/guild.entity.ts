@@ -1,16 +1,13 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  EntityRepository,
+  Repository,
 } from 'typeorm'
+import { BaseEntity } from './base.entity'
 
 @Entity()
-export class DiscordGuild {
-  @PrimaryGeneratedColumn()
-  id: number | undefined
-
+export class DiscordGuild extends BaseEntity {
   @Column()
   discord_id: string | undefined // snowflake	guild id
 
@@ -29,9 +26,28 @@ export class DiscordGuild {
   @Column()
   member_count: number | undefined // integer	total number of users in the guild
 
-  @UpdateDateColumn()
-  updated_at: Date | undefined
+  @Column({ nullable: true, type: 'string' })
+  prefix: string | null | undefined // string	the prefix of the guild, used when invoking slash commands
 
-  @CreateDateColumn()
-  created_at: Date | undefined
+  @Column()
+  deleted: boolean = false
+
+  @Column()
+  lastInteract: Date = new Date()
+}
+
+@EntityRepository(DiscordGuild)
+export class DiscordGuildRepository extends Repository<DiscordGuild> {
+  async updateLastInteract(guildId?: string): Promise<void> {
+    const guild = await this.findOne({ where: { discord_id: guildId } })
+
+    if (guild) {
+      guild.lastInteract = new Date()
+      await this.save(guild)
+    }
+  }
+
+  async getActiveGuilds(): Promise<DiscordGuild[]> {
+    return this.find({ where: { deleted: false } })
+  }
 }

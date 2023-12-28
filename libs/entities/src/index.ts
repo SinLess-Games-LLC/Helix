@@ -6,12 +6,18 @@ import { UserProfile } from './entities/user-profile.entity'
 import { UserSetting } from './entities/user-setting.entity'
 import { Account } from './entities/account.entity'
 import { Session } from './entities/session.entity'
-import { DiscordGuild } from './entities/discord/guild.entity'
-import { DiscordUser } from './entities/discord/user.entity'
-import { DiscordDailyStatistics } from './entities/discord/statistics/dailyStats.entity'
-import { DiscordWeeklyStatistics } from './entities/discord/statistics/weeklyStats.entity'
-import { DiscordMonthlyStatistics } from './entities/discord/statistics/monthlyStats.entity'
-import { DiscordYearlyStatistics } from './entities/discord/statistics/yearlyStats.entity'
+import {
+  DiscordGuild,
+  DiscordDailyStatistics,
+  DiscordUser,
+  DiscordWeeklyStatistics,
+  DiscordMonthlyStatistics,
+  DiscordYearlyStatistics,
+  Data,
+  Pastebin,
+  Image,
+  StatEntity,
+} from './entities/discord'
 
 let entities
 export default entities = [
@@ -29,6 +35,10 @@ export default entities = [
   DiscordWeeklyStatistics,
   DiscordMonthlyStatistics,
   DiscordYearlyStatistics,
+  Data,
+  Pastebin,
+  Image,
+  StatEntity,
 ]
 
 /**
@@ -49,6 +59,8 @@ export { DiscordDailyStatistics } from './entities/discord/statistics/dailyStats
 export { DiscordWeeklyStatistics } from './entities/discord/statistics/weeklyStats.entity'
 export { DiscordMonthlyStatistics } from './entities/discord/statistics/monthlyStats.entity'
 export { DiscordYearlyStatistics } from './entities/discord/statistics/yearlyStats.entity'
+export * from './entities/discord'
+export { defaultData } from './entities/discord/data.entity'
 
 /**
  * Interfaces

@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
 import { MicroserviceService } from './microservice.service'
 import { CreateMicroserviceDto } from './dto/create-microservice.dto'
 import { UpdateMicroserviceDto } from './dto/update-microservice.dto'
@@ -31,10 +23,7 @@ export class MicroserviceController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateMicroserviceDto: UpdateMicroserviceDto
-  ) {
+  update(@Param('id') id: string, @Body() updateMicroserviceDto: UpdateMicroserviceDto) {
     return this.microserviceService.update(+id, updateMicroserviceDto)
   }
 

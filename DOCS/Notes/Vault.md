@@ -14,7 +14,7 @@ Vault allows organizations to securely store secrets and sensitive data in a cen
 
 Vault can generate dynamic secrets on-demand for various backends like databases, cloud providers, and SSH. Dynamic secrets have short lifetimes and are automatically rotated, enhancing security.
 
-### Data Encryption
+### DataEntity Encryption
 
 Vault provides encryption as a service, allowing users to encrypt and decrypt data with strong encryption algorithms. It can also handle data encryption for applications and services.
 
@@ -42,7 +42,7 @@ Vault is commonly used for the following purposes:
 
 2. **Dynamic Secrets**: Generate and manage dynamic secrets for applications, databases, and cloud services.
 
-3. **Data Encryption**: Provide encryption as a service for data at rest and in transit.
+3. **DataEntity Encryption**: Provide encryption as a service for data at rest and in transit.
 
 4. **Access Control**: Enforce fine-grained access control policies based on roles and identity providers.
 

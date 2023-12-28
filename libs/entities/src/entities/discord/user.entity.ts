@@ -1,18 +1,14 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm'
+import { Column, Entity, EntityRepository, Repository } from 'typeorm'
+import { Snowflake } from 'discord-api-types/globals'
+import { BaseEntity } from './base.entity'
 
+// ===========================================
+// ================= Entity ==================
+// ===========================================
 @Entity()
-export class DiscordUser {
-  @PrimaryGeneratedColumn()
-  sid: number | undefined
-
-  @Column()
-  id: number | undefined
+export class DiscordUser extends BaseEntity {
+  @Column({ unique: true, type: 'bigint', generated: 'increment' })
+  discord_id: Snowflake | undefined
 
   @Column()
   username: string | undefined
@@ -41,9 +37,22 @@ export class DiscordUser {
   @Column()
   display_name: string | undefined
 
-  @UpdateDateColumn()
-  updated_at: Date | undefined
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  lastInteract: Date | undefined
+}
 
-  @CreateDateColumn()
-  created_at: Date | undefined
+// ===========================================
+// =========== Custom Repository =============
+// ===========================================
+@EntityRepository(DiscordUser)
+export class UserRepository extends Repository<DiscordUser> {
+  async updateLastInteract(userId?: number): Promise<void> {
+    const id = userId?.toString()
+    const user = await this.findOneBy({ discord_id: id })
+
+    if (user) {
+      user.lastInteract = new Date()
+      await this.save(user)
+    }
+  }
 }

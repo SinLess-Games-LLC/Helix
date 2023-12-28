@@ -1,10 +1,17 @@
 {
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.base.json"
+  },
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -18,8 +25,9 @@
       "@helix/entities": ["libs/entities/src/index.ts"],
       "@helix/helix-utilities": ["libs/helix-utilities/src/index.ts"],
       "@helix/shared-react-ui": ["libs/shared-react-ui/src/index.ts"],
+      "@helix/test": ["libs/test/src/index.ts"],
       "@helix/trpc": ["libs/trpc/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "package.json"]
 }

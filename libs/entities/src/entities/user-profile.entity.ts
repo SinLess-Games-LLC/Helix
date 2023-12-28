@@ -77,19 +77,19 @@ export class UserProfile {
   @Column({ type: 'enum', enum: Country, default: Country.PreferNotToSay })
   country: Country | undefined
 
-  @OneToMany(() => Microservice, (microservice) => microservice.added_by, {
+  @OneToMany(() => Microservice, microservice => microservice.added_by, {
     eager: true,
   })
   @JoinColumn()
   microservices_added: Microservice[] | undefined
 
-  @OneToMany(() => Technology, (technology) => technology.added_by, {
+  @OneToMany(() => Technology, technology => technology.added_by, {
     eager: true,
   })
   @JoinColumn()
   technologies_added: Technology[] | undefined
 
-  @OneToMany(() => News, (news) => news.added_by, {
+  @OneToMany(() => News, news => news.added_by, {
     eager: true,
   })
   @JoinColumn()

@@ -22,10 +22,7 @@ export class MicroserviceService {
     })
 
     if (exists) {
-      throw new HttpException(
-        'Microservice already exists',
-        HttpStatus.CONFLICT
-      )
+      throw new HttpException('Microservice already exists', HttpStatus.CONFLICT)
     }
 
     const microservice = new Microservice()
@@ -47,9 +44,7 @@ export class MicroserviceService {
   }
 
   update(id: number, updateMicroserviceDto: UpdateMicroserviceDto) {
-    return from(
-      this.microserviceRepository.update({ id }, updateMicroserviceDto)
-    )
+    return from(this.microserviceRepository.update({ id }, updateMicroserviceDto))
   }
 
   remove(id: number) {

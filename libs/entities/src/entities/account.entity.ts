@@ -3,7 +3,6 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToMany,
   ValueTransformer,
 } from 'typeorm'
 import { User } from './user.entity'
@@ -67,7 +66,7 @@ export class Account {
   @Column({ type: 'varchar', nullable: true })
   oauth_token!: string | null
 
-  @ManyToOne(() => User, (user) => user.accounts, {
+  @ManyToOne(() => User, user => user.accounts, {
     createForeignKeyConstraints: true,
   })
   user!: User

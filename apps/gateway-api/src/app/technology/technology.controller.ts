@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
 import { TechnologyService } from './technology.service'
 import { CreateTechnologyDto } from './dto/create-technology.dto'
 import { UpdateTechnologyDto } from './dto/update-technology.dto'
@@ -31,10 +23,7 @@ export class TechnologyController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateTechnologyDto: UpdateTechnologyDto
-  ) {
+  update(@Param('id') id: string, @Body() updateTechnologyDto: UpdateTechnologyDto) {
     return this.technologyService.update(+id, updateTechnologyDto)
   }
 

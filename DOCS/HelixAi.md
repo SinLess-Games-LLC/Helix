@@ -14,7 +14,7 @@ Helix AI seamlessly integrates with a wide range of platforms, including Discord
 
 Powered by advanced natural language processing (NLP) and machine learning (ML), Helix AI is your intelligent companion. It can answer questions, set reminders, provide recommendations, and automate tasks, freeing up your time for what matters most.
 
-### 3. Data Analysis and Insights
+### 3. DataEntity Analysis and Insights
 
 Unlock the power of data with Helix AI's data analysis capabilities. It can sift through structured and unstructured data, generate insightful reports, charts, and visualizations, and help you make data-driven decisions.
 
@@ -30,7 +30,7 @@ Tailor Helix AI to your preferences. Define workflows, set commands, and persona
 
 Helix AI comes with built-in user support. Got questions or facing issues? Our support system is there to assist you promptly. Your feedback matters and helps us improve.
 
-### 7. Data Security and Privacy
+### 7. DataEntity Security and Privacy
 
 Your data security and privacy are our top priorities. Helix AI complies with industry regulations, including HIPAA, to ensure your information remains confidential.
 

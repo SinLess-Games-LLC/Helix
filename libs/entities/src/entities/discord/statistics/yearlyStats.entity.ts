@@ -16,7 +16,7 @@ export class DiscordYearlyStatistics {
   @Column()
   year: number | undefined
 
-  @ManyToOne(() => DiscordMonthlyStatistics, (monthly) => monthly.year)
+  @ManyToOne(() => DiscordMonthlyStatistics, monthly => monthly.year)
   month: DiscordMonthlyStatistics | undefined
 
   @UpdateDateColumn()

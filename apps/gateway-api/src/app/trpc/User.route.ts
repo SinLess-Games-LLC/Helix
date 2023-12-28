@@ -13,7 +13,7 @@ export class UserRouter {
           message: z.string(),
         })
       )
-      .mutation(async (opts) => {
+      .mutation( () => {
         return {
           message: 'Success',
         }

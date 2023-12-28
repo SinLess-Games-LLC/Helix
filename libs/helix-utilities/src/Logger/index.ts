@@ -1,11 +1,4 @@
-export type logLevel =
-  | 'critical'
-  | 'error'
-  | 'warning'
-  | 'success'
-  | 'info'
-  | 'debug'
-  | 'trace'
+export type logLevel = 'critical' | 'error' | 'warning' | 'success' | 'info' | 'debug' | 'trace'
 
 export interface LoggerOptions {
   level?: logLevel
@@ -38,9 +31,7 @@ export class HelixLogger {
     switch (level) {
       case 'critical':
         console.log(
-          `${
-            loggerColors.critical
-          }[${this.name?.toUpperCase()}] | [CRITICAL] | ${
+          `${loggerColors.critical}[${this.name?.toUpperCase()}] | [CRITICAL] | ${
             loggerColors.message
           }${message}`
         )

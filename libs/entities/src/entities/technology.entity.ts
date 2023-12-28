@@ -81,7 +81,7 @@ export class Technology {
   @Column()
   slug: string | undefined
 
-  @ManyToOne(() => UserProfile, (user) => user.technologies_added, {
+  @ManyToOne(() => UserProfile, user => user.technologies_added, {
     cascade: true,
   })
   added_by: number | undefined
@@ -93,7 +93,7 @@ export class Technology {
   createdAt: Date | undefined
 
   @BeforeInsert()
-  async generateSlug() {
+  generateSlug() {
     if (typeof this.name === 'string') {
       this.slug = slugify(this.name, '_')
     }
