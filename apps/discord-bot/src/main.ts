@@ -1,57 +1,33 @@
+import 'reflect-metadata'
+import { HelixLogger } from '@helix/helix-utilities'
 import { HelixClient } from './utils/helix.client'
 import { IntentsBitField } from 'discord.js'
-import { HelixLogger } from '@helix/helix-utilities'
 
 const logger = new HelixLogger({ name: 'Bootstrap' })
+const intents: IntentsBitField = new IntentsBitField(3276799)
+export const helix: HelixClient = new HelixClient({
+  intents: intents,
+  shards: 'auto',
+})
 
-/**
- * Bootstraps the Helix application.
- *
- * This function initializes the HelixClient, sets up Discord intents, and starts the application.
- * It also logs in and logs a message when the client is ready.
- *
- * @async
- * @function
- * @returns {Promise<void>} A Promise that resolves when the Helix application is successfully bootstrapped.
- * @throws {Error} If there is an error during the bootstrap process.
- */
+function handleSigint() {
+  logger.info('Received SIGINT. Stopping Helix application...')
+  helix
+    .stop()
+    .then(() => {
+      process.exitCode = 0
+      process.exit()
+    })
+    .catch(error => {
+      process.exitCode = 1
+      logger.error(error as string)
+    })
+}
+
+// Handle SIGINT (Ctrl+C) to stop the application gracefully
+process.on('SIGINT', handleSigint)
+
 async function bootstrap(): Promise<void> {
-  /**
-   * Represents the Discord intents configuration for the HelixClient.
-   *
-   * Intents define which events the bot will receive from Discord.
-   * The value is calculated using the Discord Intents Calculator.
-   *
-   * @see {@link https://discord-intents-calculator.vercel.app/|Discord Intents Calculator}
-   *
-   * @type {IntentsBitField}
-   * @constant
-   * @memberof bootstrap
-   * @inner
-   */
-  const intents: IntentsBitField = new IntentsBitField(3276799)
-
-  /**
-   * The HelixClient instance responsible for running the application.
-   *
-   * @type {HelixClient}
-   * @constant
-   * @memberof bootstrap
-   * @inner
-   */
-  const helix: HelixClient = new HelixClient({
-    intents: intents,
-    shards: 'auto',
-  })
-
-  /**
-   * Starts the Helix application, including logging in and setting up necessary components.
-   *
-   * @async
-   * @method
-   * @memberof bootstrap
-   * @inner
-   */
   await helix.start()
 }
 
