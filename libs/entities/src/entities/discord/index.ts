@@ -2,7 +2,6 @@ export * from './base.entity'
 
 export * from './user.entity'
 export * from './guild.entity'
-export * from './stat.entity'
 export * from './image.entity'
 export * from './pastebin.entity'
 

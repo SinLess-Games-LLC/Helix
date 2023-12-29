@@ -15,7 +15,6 @@ import {
   DiscordYearlyStatistics,
   Pastebin,
   Image,
-  StatEntity,
 } from './entities/discord'
 
 let entities
@@ -36,7 +35,6 @@ export default entities = [
   DiscordYearlyStatistics,
   Pastebin,
   Image,
-  StatEntity,
 ]
 
 /**
