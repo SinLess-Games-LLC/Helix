@@ -4,27 +4,29 @@ import express, { Express } from 'express'
 import { BotColors, ErrorCodes } from './bot.constants'
 import { botColors, errCodes } from '../typings/bot.types'
 import { RootRouter } from '../routers/root.router'
-import cors from 'cors'
-import cookieParser from 'cookie-parser'
 import { CommandType } from '../typings/command.type'
 import * as path from 'path'
 import * as fs from 'fs'
+import { HealthRouter } from '../routers/health.router'
+import { initializeDatabase } from './database.functions'
+import { DataSource } from 'typeorm'
 
 export class HelixClient extends Client {
-  logger: HelixLogger = new HelixLogger({ name: 'Helix Client' })
+  private logger: HelixLogger = new HelixLogger({ name: 'Helix Client' })
   private commandLogger = new HelixLogger({ name: 'Commands Register' })
   private eventLogger = new HelixLogger({ name: 'Event Register' })
+  private apiLogger = new HelixLogger({ name: 'API' })
+
   private api: Express = express()
-  private _globalPrefix: string = '/api/v1'
   public prefix: string = 'h!'
-  public _commands: CommandType[] = []
   public commands: Collection<string, CommandType> = new Collection()
-  public readonly startTimeStamp: number = Date.now()
 
   public readonly config: HelixConfiguration = new HelixConfiguration()
   public readonly Colors: botColors = BotColors
   public readonly ErrorCodes: errCodes = ErrorCodes
 
+  public _commands: CommandType[] = []
+  private _globalPrefix: string = '/api/v1'
   public readonly _token: string = this.config.discord.application.client.bot.token
   public readonly _prefix: string = 'h!'
   private readonly _rest: REST = new REST({ version: '9' }).setToken(this._token)
@@ -49,86 +51,86 @@ export class HelixClient extends Client {
     intents: this._intents,
     shards: 'auto',
   }
+  Database: DataSource
 
   constructor(options: ClientOptions) {
     super(options)
   }
 
   private async _init() {
-    // set global prefix of api to /api/v1
-    this.api.settings.prefix = this._globalPrefix
-    this.api.use(this._globalPrefix, RootRouter)
-    // set up cors
-    this.api.use(cors())
-    // set up cookie parser
-    this.api.use(cookieParser())
-    // register commands
-    await this._registerCommands()
-    this.logger.info(`Registered ${this.commands.size} commands`)
-    this._registerEvents()
+    try {
+      // set global prefix of api to /api/v1
+      this.api.settings.prefix = this._globalPrefix
+      this.fetchRouters()
+      // register commands
+      await this._registerCommands()
+      this.logger.info(`Registered ${this.commands.size} commands`)
+      this._registerEvents()
+      this.Database = await initializeDatabase()
+    } catch (err: unknown) {
+      this.logger.critical('Failed to initialize Helix Client')
+      this.logger.error(err as string)
+    }
   }
 
-  /**
-   * Registers commands from the specified directory and its subdirectories.
-   *
-   * @private
-   * @async
-   * @method
-   * @memberof HelixClient
-   * @instance
-   *
-   * @returns {Promise<void>} A Promise that resolves when command registration is complete.
-   *
-   * @throws {Error} If there is an error during the command registration process.
-   */
+  private fetchRouters() {
+    this.apiLogger.info('Fetching Routers')
+    this.api.use(this._globalPrefix, RootRouter)
+    this.api.use(this._globalPrefix, HealthRouter)
+  }
+
   private async _registerCommands(): Promise<void> {
     await this._deleteCommands()
+    try {
+      this.commandLogger.info('Registering Commands')
+      const commandFileDir: string = path.join(__dirname, '..', 'commands')
 
-    this.commandLogger.info('Registering Commands')
-    const commandFileDir: string = path.join(__dirname, '..', 'commands')
+      // check if command directory exists
+      if (!fs.existsSync(commandFileDir)) {
+        return this.commandLogger.critical(
+          `Command files directory does not exist: ${commandFileDir}`
+        )
+      }
 
-    // check if command directory exists
-    if (!fs.existsSync(commandFileDir)) {
-      return this.commandLogger.critical(
-        `Command files directory does not exist: ${commandFileDir}`
-      )
-    }
+      // checks if it is in the dist directory
+      if (commandFileDir.toString().includes('dist')) {
+        this.commandLogger.info(`Command files directory is the distribution directory.`)
+      }
 
-    // checks if it is in the dist directory
-    if (commandFileDir.toString().includes('dist')) {
-      this.commandLogger.info(`Command files directory is the distribution directory.`)
-    }
+      // read command files directory
+      const commandGroupFolders: string[] = fs.readdirSync(commandFileDir)
 
-    // read command files directory
-    const commandGroupFolders: string[] = fs.readdirSync(commandFileDir)
+      // loop through command group folders
+      for (const commandGroupFolder of commandGroupFolders) {
+        const commandGroupFolderDir: string = path.join(commandFileDir, commandGroupFolder)
+        const commandFiles: string[] = fs.readdirSync(commandGroupFolderDir)
 
-    // loop through command group folders
-    for (const commandGroupFolder of commandGroupFolders) {
-      const commandGroupFolderDir: string = path.join(commandFileDir, commandGroupFolder)
-      const commandFiles: string[] = fs.readdirSync(commandGroupFolderDir)
+        // loop through command files
+        for (const commandFile of commandFiles) {
+          const commandFilePath: string = path.join(commandGroupFolderDir, commandFile)
+          // skip source map files
+          if (commandFile.endsWith('.map')) {
+            continue
+          }
 
-      // loop through command files
-      for (const commandFile of commandFiles) {
-        const commandFilePath: string = path.join(commandGroupFolderDir, commandFile)
-        // skip source map files
-        if (commandFile.endsWith('.map')) {
-          continue
-        }
-
-        // import command
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const command: CommandType = require(commandFilePath)
-        // push command to commands array
-        this._commands.push(command)
-        if ('data' in command && 'execute' in command) {
-          // set command to client commands collection
-          this.commands.set(command.data.name, command)
-        } else {
-          this.commandLogger.error(
-            `[WARNING] The command at ${commandFile} is missing a required "data" or "execute" property.`
-          )
+          // import command
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          const command: CommandType = require(commandFilePath)
+          // push command to commands array
+          this._commands.push(command)
+          if ('data' in command && 'execute' in command) {
+            // set command to client commands collection
+            this.commands.set(command.data.name, command)
+          } else {
+            this.commandLogger.error(
+              `[WARNING] The command at ${commandFile} is missing a required "data" or "execute" property.`
+            )
+          }
         }
       }
+    } catch (err: unknown) {
+      this.logger.critical('Failed to register commands')
+      this.logger.error(err as string)
     }
 
     // register commands
@@ -142,7 +144,11 @@ export class HelixClient extends Client {
       const commands = this._commands.map(command => command.data.toJSON())
       this.commandLogger.debug(`Commands: ${JSON.stringify(commands)}`)
 
-      await this._rest.put(Routes.applicationCommands('1143176646074052698'), { body: commands })
+      try {
+        await this._rest.put(Routes.applicationCommands('1143176646074052698'), { body: commands })
+      } catch {
+        this.commandLogger.error('Failed to register global commands')
+      }
       this.commandLogger.info('Registered global commands')
     } catch (err) {
       this.commandLogger.error(`An error occurred while registering global commands: \n${err}`)
@@ -221,25 +227,16 @@ export class HelixClient extends Client {
       /**
        * Client
        */
-      try {
-        this.logger.info('Logging in to discord')
-        await this.login(this._token)
-        this.logger.info('Helix logged into Discord')
-      } catch (err: unknown) {
-        this.logger.critical('Failed to Login to Discord')
-        this.logger.error(err as string)
-      }
+      this.logger.info('Logging in to discord')
+      await this.login(this._token)
+      this.logger.info('Helix logged into Discord')
+
       /**
        * Api
        */
-      try {
-        this.logger.info('Starting Helix API')
-        this.api.listen(this.config.discord.api.port || 3000)
-        this.logger.info('Helix API Started')
-      } catch (err: unknown) {
-        this.logger.critical('Failed to start Helix API')
-        this.logger.error(err as string)
-      }
+      this.logger.info('Starting Helix API')
+      this.api.listen(this.config.discord.api.port || 3000)
+      this.logger.info('Helix API Started')
     } catch (err: unknown) {
       this.logger.critical('Failed to start Helix Client')
       this.logger.error(err as string)
@@ -248,7 +245,7 @@ export class HelixClient extends Client {
 
   public async stop() {
     this.logger.debug('Stopping Helix Client')
-    await this.destroy()
     this.logger.info('Helix Client Stopped')
+    await this.destroy()
   }
 }
