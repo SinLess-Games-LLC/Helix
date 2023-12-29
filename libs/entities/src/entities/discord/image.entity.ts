@@ -16,25 +16,25 @@ export class Image extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column()
+  @Column({ type: 'text' })
   fileName: string | undefined
 
-  @Column({ default: '' })
+  @Column({ type: 'text', default: '' })
   basePath?: string
 
-  @Column()
+  @Column({ type: 'text' })
   url: string | undefined
 
-  @Column()
+  @Column({ type: 'int' })
   size: number | undefined
 
   @Column('simple-array')
   tags: string[] | undefined
 
-  @Column()
+  @Column({ type: 'text' })
   hash: string | undefined
 
-  @Column()
+  @Column({ type: 'text' })
   deleteHash: string | undefined
 }
 

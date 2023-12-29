@@ -20,13 +20,13 @@ export class Account {
   @Column({ type: 'uuid' })
   userId!: string
 
-  @Column()
+  @Column({ type: 'text' })
   type!: string
 
-  @Column()
+  @Column({ type: 'text' })
   provider!: string
 
-  @Column()
+  @Column({ type: 'text' })
   providerAccountId!: string
 
   @Column({ type: 'varchar', nullable: true })

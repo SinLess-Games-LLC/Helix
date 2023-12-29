@@ -27,10 +27,10 @@ export class Data extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column({ unique: true })
+  @Column({ type: 'text', unique: true })
   key!: string
 
-  @Column()
+  @Column({ type: 'text' })
   value: string = ''
 }
 

@@ -49,16 +49,16 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column()
+  @Column('uuid')
   uuid: string | undefined
 
   @Column({ type: 'varchar', nullable: true })
   name: string | undefined
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   user_name: string | undefined
 
-  @Column()
+  @Column('text')
   email: string | undefined
 
   @Column({ type: 'varchar', nullable: true, transformer: transformer.date })
@@ -67,20 +67,20 @@ export class User {
   @Column({ type: 'varchar', nullable: true })
   image!: string | null
 
-  @Column()
+  @Column('text')
   password: string | undefined
 
   @Column({ type: 'enum', enum: Role, default: Role.User })
   role: Role | undefined
 
-  @Column({ nullable: true })
+  @Column({ type: 'int', nullable: true })
   profile_id: number | undefined
 
   @OneToOne(() => UserProfile, { cascade: true, eager: true })
   @JoinColumn({ name: 'profile_id', referencedColumnName: 'id' })
   profile: UserProfile | undefined
 
-  @Column({ nullable: true })
+  @Column({ type: 'int', nullable: true })
   settings_id: number | undefined
 
   @OneToOne(() => UserSetting, { cascade: true, eager: true })

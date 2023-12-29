@@ -12,10 +12,10 @@ export class StatEntity {
   @PrimaryKey()
   id: number | undefined
 
-  @Property()
+  @Property({ type: 'text' })
   type!: string
 
-  @Property()
+  @Property({ type: 'text' })
   value: string = ''
 
   @Property({ type: 'json', nullable: true })

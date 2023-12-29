@@ -25,7 +25,7 @@ export class News {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column()
+  @Column('text')
   name: string | undefined
 
   @Column('text')
@@ -34,13 +34,13 @@ export class News {
   @Column('text')
   content: string | undefined
 
-  @Column()
+  @Column('text')
   image: string | undefined
 
-  @Column()
+  @Column('text')
   alt: string | undefined
 
-  @Column()
+  @Column('text')
   slug: string | undefined
 
   @ManyToOne(() => UserProfile, userProfile => userProfile.news_added, {

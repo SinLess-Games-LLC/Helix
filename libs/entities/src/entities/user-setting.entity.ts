@@ -18,13 +18,13 @@ export class UserSetting {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   newsletter: boolean | undefined
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   premium: boolean | undefined
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   twoFactorAuthentication: boolean | undefined
 
   @UpdateDateColumn()

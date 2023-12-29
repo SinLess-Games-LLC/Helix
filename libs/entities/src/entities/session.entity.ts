@@ -17,13 +17,13 @@ export class Session {
   @PrimaryGeneratedColumn('uuid')
   id!: string
 
-  @Column({ unique: true })
+  @Column({ type: 'text', unique: true })
   sessionToken!: string
 
   @Column({ type: 'uuid' })
   userId!: string
 
-  @Column({ transformer: transformer.date })
+  @Column({ type: 'text', transformer: transformer.date })
   expires!: string
 
   @ManyToOne(() => User, user => user.sessions)

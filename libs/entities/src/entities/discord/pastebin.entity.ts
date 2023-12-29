@@ -16,10 +16,10 @@ export class Pastebin extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string | undefined
 
-  @Column()
+  @Column({ type: 'text' })
   editCode: string | undefined
 
-  @Column({ default: -1 })
+  @Column({ type: 'int', default: -1 })
   lifetime: number | undefined
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

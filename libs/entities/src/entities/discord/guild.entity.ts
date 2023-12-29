@@ -3,31 +3,31 @@ import { BaseEntity } from './base.entity'
 
 @Entity()
 export class DiscordGuild extends BaseEntity {
-  @Column()
+  @Column({ type: 'text' })
   discord_id: string | undefined // snowflake	guild id
 
-  @Column({ default: '' })
+  @Column({ type: 'text', default: '' })
   name: string | undefined // string	guild name (2-100 characters, excluding trailing and leading whitespace)
 
-  @Column()
+  @Column({ type: 'bigint' })
   owner_id: number | undefined // snowflake	id of owner
 
-  @Column()
+  @Column({ type: 'int' })
   Channel_count: number | undefined // integer	total number of text channels and categories that the guild has
 
-  @Column()
+  @Column({ type: 'int' })
   thread_count: number | undefined // integer	total number of threads that the guild has across all of its channels
 
-  @Column()
+  @Column({ type: 'int' })
   member_count: number | undefined // integer	total number of users in the guild
 
   @Column({ nullable: true, type: 'string' })
   prefix: string | null | undefined // string	the prefix of the guild, used when invoking slash commands
 
-  @Column()
+  @Column({ type: 'boolean' })
   deleted: boolean = false
 
-  @Column()
+  @Column({ type: 'timestamp' })
   lastInteract: Date = new Date()
 }
 

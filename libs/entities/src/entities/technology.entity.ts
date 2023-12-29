@@ -46,7 +46,7 @@ export class Technology {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column()
+  @Column('text')
   name: string | undefined
 
   @Column('text')
@@ -55,10 +55,10 @@ export class Technology {
   @Column('text')
   content: string | undefined
 
-  @Column()
+  @Column('text')
   image: string | undefined
 
-  @Column()
+  @Column('text')
   alt: string | undefined
 
   @Column({
@@ -75,10 +75,10 @@ export class Technology {
   })
   category2: TechCategory | undefined
 
-  @Column()
+  @Column('text')
   website: string | undefined
 
-  @Column()
+  @Column('text')
   slug: string | undefined
 
   @ManyToOne(() => UserProfile, user => user.technologies_added, {

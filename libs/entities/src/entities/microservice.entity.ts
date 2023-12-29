@@ -26,25 +26,25 @@ export class Microservice {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column()
+  @Column({ type: 'text' })
   name: string | undefined
 
-  @Column('text')
+  @Column({ type: 'text' })
   description: string | undefined
 
-  @Column('text')
+  @Column({ type: 'text' })
   content: string | undefined
 
-  @Column()
+  @Column({ type: 'text' })
   image: string | undefined
 
-  @Column()
+  @Column({ type: 'text' })
   alt: string | undefined
 
   @ManyToOne(() => UserProfile, userProfile => userProfile.microservices_added)
   added_by: number | undefined
 
-  @Column({ unique: true, default: '' })
+  @Column({ type: 'text', unique: true, default: '' })
   slug: string | undefined
 
   @UpdateDateColumn()

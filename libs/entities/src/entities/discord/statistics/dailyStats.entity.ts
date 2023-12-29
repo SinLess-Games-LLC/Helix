@@ -13,34 +13,34 @@ export class DiscordDailyStatistics {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column()
-  guildId: string | undefined
+  @Column('int')
+  guildId: number | undefined
 
-  @Column()
+  @Column('int')
   kicks: number | undefined
 
-  @Column()
+  @Column('int')
   warnings: number | undefined
 
-  @Column()
+  @Column('int')
   bans: number | undefined
 
-  @Column()
+  @Column('int')
   channels: number | undefined
 
-  @Column()
+  @Column('int')
   emojis: number | undefined
 
-  @Column()
+  @Column('int')
   stickers: number | undefined
 
-  @Column()
+  @Column('int')
   members: number | undefined
 
-  @Column()
+  @Column('int')
   roles: number | undefined
 
-  @Column()
+  @Column('int')
   bots: number | undefined
 
   @ManyToOne(() => DiscordWeeklyStatistics, weeklyStats => weeklyStats.dailyStats)

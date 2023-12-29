@@ -15,7 +15,7 @@ export class DiscordWeeklyStatistics {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column()
+  @Column('int')
   week: number | undefined
 
   @OneToMany(() => DiscordDailyStatistics, dailyStats => dailyStats.week)

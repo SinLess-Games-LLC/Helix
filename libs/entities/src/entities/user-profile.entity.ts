@@ -47,19 +47,19 @@ export class UserProfile {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   firstName: string | undefined
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   middleName: string | undefined
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   lastName: string | undefined
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   avatar: string | undefined
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   birthday: Date | undefined
 
   @Column({ type: 'enum', enum: Sex, default: Sex.PreferNotToSay })
@@ -95,10 +95,10 @@ export class UserProfile {
   @JoinColumn()
   news_added: News[] | undefined
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   email_verified: boolean | undefined
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   age_verified: boolean | undefined
 
   @UpdateDateColumn()

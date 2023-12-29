@@ -15,7 +15,7 @@ export class DiscordMonthlyStatistics {
   @PrimaryGeneratedColumn()
   id: number | undefined
 
-  @Column()
+  @Column('int')
   month: number | undefined
 
   @OneToMany(() => DiscordWeeklyStatistics, weeklyStats => weeklyStats.month)
