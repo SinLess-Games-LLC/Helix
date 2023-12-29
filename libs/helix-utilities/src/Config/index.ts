@@ -16,6 +16,7 @@ import { ConfigTwitchInterface } from './interfaces/Twitch.interface'
 import { ConfigLavalinkInterface } from './interfaces/Lavalink.interface'
 import { colors, errCodes } from './config.type'
 import { IntentsBitField } from 'discord.js'
+import * as process from 'process'
 dotenv.config()
 
 export class HelixConfiguration {
@@ -361,6 +362,7 @@ export class HelixConfiguration {
 
   private loadLogging() {
     const logging: ConfigLoggingInterface = {
+      enabled: this.convertToBoolean(process.env.LOGGING_ENABLED) || false,
       location: {
         console: {
           enabled: this.convertToBoolean(process.env.LOG_TO_CONSOLE) || false,

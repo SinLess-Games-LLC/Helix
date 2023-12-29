@@ -1,4 +1,4 @@
-export type logLevel = 'critical' | 'error' | 'warning' | 'success' | 'info' | 'debug' | 'trace'
+export type logLevel = 'critical' | 'error' | 'warn' | 'success' | 'info' | 'debug' | 'trace'
 
 export interface LoggerOptions {
   level?: logLevel
@@ -7,7 +7,7 @@ export interface LoggerOptions {
 
 export enum loggerColors {
   critical = '\u001b[31m',
-  warning = '\u001b[33m',
+  warn = '\u001b[33m',
   success = '\u001b[32m',
   info = '\u001b[34m',
   debug = '\u001b[36m',
@@ -43,9 +43,9 @@ export class HelixLogger {
           }${message}`
         )
         break
-      case 'warning':
+      case 'warn':
         console.log(
-          `${loggerColors.warning}[${this.name?.toUpperCase()}] | [WARNING] | ${
+          `${loggerColors.warn}[${this.name?.toUpperCase()}] | [WARNING] | ${
             loggerColors.message
           }${message}`
         )
@@ -101,7 +101,7 @@ export class HelixLogger {
         // this.logToFile(level, message)
         // this.logToElastic(level, message)
         break
-      case 'warning':
+      case 'warn':
         this.logToConsole(level, message)
         // this.logToFile(level, message)
         // this.logToElastic(level, message)
@@ -132,8 +132,8 @@ export class HelixLogger {
     this.log('error', message)
   }
 
-  public warning(message: string) {
-    this.log('warning', message)
+  public warn(message: string) {
+    this.log('warn', message)
   }
 
   public success(message: string) {

@@ -56,6 +56,7 @@ declare namespace NodeJS {
     LOGSTASH_PASSWORD: string
     LOGSTASH_PORT: string
     LOGSTASH_USERNAME: string
+    LOGGING_ENABLED: string
     LOG_FILE: string
     LOG_TO_CONSOLE: string
     LOG_TO_FILE: string
