@@ -41,7 +41,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install gh
 
-      - name: Create Pull Request
+      - name: Check if PR exists
+        id: check_pr
         run: |
-          branch_name=${GITHUB_REF#refs/heads/}
+          existing_prs=$(gh pr list --base develop --head "${branch_name}" --state open --json number)
+          if [ -n "$existing_prs" ]; then
+            echo "PR already exists for branch $branch_name. Skipping PR creation."
+            exit 0
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_pr.outcome != 'success'
+        run: |
           gh pr create --base develop --head "${branch_name}" --title "${branch_name}" --body "This PR was automatically created by a GitHub Action."
