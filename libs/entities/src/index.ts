@@ -13,7 +13,6 @@ import {
   DiscordWeeklyStatistics,
   DiscordMonthlyStatistics,
   DiscordYearlyStatistics,
-  Data,
   Pastebin,
   Image,
   StatEntity,
@@ -35,7 +34,6 @@ export default entities = [
   DiscordWeeklyStatistics,
   DiscordMonthlyStatistics,
   DiscordYearlyStatistics,
-  Data,
   Pastebin,
   Image,
   StatEntity,
@@ -60,7 +58,6 @@ export { DiscordWeeklyStatistics } from './entities/discord/statistics/weeklySta
 export { DiscordMonthlyStatistics } from './entities/discord/statistics/monthlyStats.entity'
 export { DiscordYearlyStatistics } from './entities/discord/statistics/yearlyStats.entity'
 export * from './entities/discord'
-export { defaultData } from './entities/discord/data.entity'
 
 /**
  * Interfaces

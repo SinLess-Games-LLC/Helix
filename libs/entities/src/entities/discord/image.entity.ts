@@ -19,7 +19,7 @@ export class Image extends BaseEntity {
   @Column({ type: 'text' })
   fileName: string | undefined
 
-  @Column({ type: 'text', default: '' })
+  @Column({ type: 'text' })
   basePath?: string
 
   @Column({ type: 'text' })

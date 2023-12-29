@@ -17,7 +17,7 @@ export class Session {
   @PrimaryGeneratedColumn('uuid')
   id!: string
 
-  @Column({ type: 'text', unique: true })
+  @Column({ type: 'text' })
   sessionToken!: string
 
   @Column({ type: 'uuid' })

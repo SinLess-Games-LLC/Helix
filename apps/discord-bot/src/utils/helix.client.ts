@@ -10,6 +10,9 @@ import * as fs from 'fs'
 import { HealthRouter } from '../routers/health.router'
 import { initializeDatabase } from './database.functions'
 import { DataSource } from 'typeorm'
+import { getRedisClient } from './database.constants'
+import { RedisModules, RedisFunctions, RedisScripts } from 'redis'
+import { RedisClientType } from '@redis/client'
 
 export class HelixClient extends Client {
   private logger: HelixLogger = new HelixLogger({ name: 'Helix Client' })
@@ -24,6 +27,22 @@ export class HelixClient extends Client {
   public readonly config: HelixConfiguration = new HelixConfiguration()
   public readonly Colors: botColors = BotColors
   public readonly ErrorCodes: errCodes = ErrorCodes
+  public ready: boolean = false
+  public cache: RedisClientType<
+    {
+      graph: any
+      json: any
+      ft: any
+      ts: any
+      bf: any
+      cms: any
+      cf: any
+      tDigest: any
+      topK: any
+    } & RedisModules,
+    RedisFunctions,
+    RedisScripts
+  >
 
   public _commands: CommandType[] = []
   private _globalPrefix: string = '/api/v1'
@@ -37,26 +56,22 @@ export class HelixClient extends Client {
    * The value is calculated using the Discord Intents Calculator.
    *
    * @see {@link https://discord-intents-calculator.vercel.app/} | Discord Intents Calculator
-   *
-   * @type {IntentsBitField}
-   * @private
-   * @memberof HelixClient
-   * @instance
-   *
-   * @default 3276799
-   * @description The default value includes all non-privileged and privileged intents.
    */
   public _intents: IntentsBitField = new IntentsBitField(3276799)
   public readonly _options: ClientOptions = {
     intents: this._intents,
     shards: 'auto',
   }
-  Database: DataSource
+  public Database: DataSource
 
   constructor(options: ClientOptions) {
     super(options)
   }
 
+  public setReady(bool: boolean) {
+    this.logger.info('Setting ready')
+    return (this.ready = bool)
+  }
   private async _init() {
     try {
       // set global prefix of api to /api/v1
@@ -66,7 +81,8 @@ export class HelixClient extends Client {
       await this._registerCommands()
       this.logger.info(`Registered ${this.commands.size} commands`)
       this._registerEvents()
-      this.Database = await initializeDatabase()
+      await initializeDatabase()
+      this.cache = await getRedisClient()
     } catch (err: unknown) {
       this.logger.critical('Failed to initialize Helix Client')
       this.logger.error(err as string)
@@ -136,19 +152,12 @@ export class HelixClient extends Client {
     // register commands
     try {
       this.commandLogger.info('Registering global commands')
-      const registeredCommands = await this._rest.get(
-        Routes.applicationCommands('1143176646074052698')
-      )
-      this.commandLogger.debug(`Registered commands: ${JSON.stringify(registeredCommands)}`)
 
       const commands = this._commands.map(command => command.data.toJSON())
       this.commandLogger.debug(`Commands: ${JSON.stringify(commands)}`)
 
-      try {
-        await this._rest.put(Routes.applicationCommands('1143176646074052698'), { body: commands })
-      } catch {
-        this.commandLogger.error('Failed to register global commands')
-      }
+      this.commandLogger.info('pushing commands to Discord')
+      await this._rest.put(Routes.applicationCommands('1143176646074052698'), { body: commands })
       this.commandLogger.info('Registered global commands')
     } catch (err) {
       this.commandLogger.error(`An error occurred while registering global commands: \n${err}`)
@@ -206,9 +215,9 @@ export class HelixClient extends Client {
 
             if (event.enabled) {
               if (event.once) {
-                return this.once(event.name, (...args) => event.execute(...args))
+                this.once(event.name, (...args) => event.execute(...args))
               } else {
-                return this.on(event.name, (...args) => event.execute(...args))
+                this.on(event.name, (...args) => event.execute(...args))
               }
             }
           }
@@ -230,7 +239,8 @@ export class HelixClient extends Client {
       this.logger.info('Logging in to discord')
       await this.login(this._token)
       this.logger.info('Helix logged into Discord')
-
+      this.setReady(true)
+      this.logger.debug(`bot ready: ${this.ready}`)
       /**
        * Api
        */

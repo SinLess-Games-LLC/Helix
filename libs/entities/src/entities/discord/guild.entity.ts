@@ -6,7 +6,7 @@ export class DiscordGuild extends BaseEntity {
   @Column({ type: 'text' })
   discord_id: string | undefined // snowflake	guild id
 
-  @Column({ type: 'text', default: '' })
+  @Column({ type: 'text' })
   name: string | undefined // string	guild name (2-100 characters, excluding trailing and leading whitespace)
 
   @Column({ type: 'bigint' })
@@ -21,7 +21,7 @@ export class DiscordGuild extends BaseEntity {
   @Column({ type: 'int' })
   member_count: number | undefined // integer	total number of users in the guild
 
-  @Column({ nullable: true, type: 'string' })
+  @Column({ nullable: true, type: 'text' })
   prefix: string | null | undefined // string	the prefix of the guild, used when invoking slash commands
 
   @Column({ type: 'boolean' })

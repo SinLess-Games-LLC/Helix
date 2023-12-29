@@ -11,7 +11,7 @@ export const helix: HelixClient = new HelixClient({
 })
 
 function handleSigint() {
-  logger.info('Received SIGINT. Stopping Helix application...')
+  logger.info('Stopping Helix application...')
   helix
     .stop()
     .then(() => {

@@ -44,7 +44,7 @@ export class Microservice {
   @ManyToOne(() => UserProfile, userProfile => userProfile.microservices_added)
   added_by: number | undefined
 
-  @Column({ type: 'text', unique: true, default: '' })
+  @Column({ type: 'text' })
   slug: string | undefined
 
   @UpdateDateColumn()

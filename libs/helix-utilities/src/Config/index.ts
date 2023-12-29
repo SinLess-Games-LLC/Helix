@@ -288,7 +288,7 @@ export class HelixConfiguration {
         },
         database: {
           name: process.env.MYSQL_DATABASE || '',
-          charset: 'utf-8',
+          charset: 'utf8mb4',
           timezone: process.env.TIMEZONE || 'America/Denver',
         },
       },
