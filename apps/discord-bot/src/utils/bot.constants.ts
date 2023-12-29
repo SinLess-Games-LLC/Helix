@@ -1,5 +1,26 @@
 import { botColors, errCodes } from '../typings/bot.types'
 
+export const discordStatusSummaryUrl = 'https://discordstatus.com/api/v2/summary.json'
+export const discordStatusUrl = 'https://discordstatus.com/api/v2/status.json'
+export const cloudflareStatusSummaryUrl = 'https://www.cloudflarestatus.com/api/v2/summary.json'
+
+export const requiredDiscordComponents = [
+  'API',
+  'CloudFlare',
+  'Media Proxy',
+  'Gateway',
+  'Push Notifications',
+  'Search',
+  'Voice',
+  'Client',
+  'Third Party',
+  'Server Web Pages',
+  'US Central',
+  'US East',
+  'US South',
+  'US West',
+]
+
 type WaitFunction = (ms: number, value?: any) => Promise<ReturnType<typeof setTimeout>>
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 export const wait: WaitFunction = require('node:timers/promises').setTimeout
