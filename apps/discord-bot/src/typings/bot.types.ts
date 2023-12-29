@@ -131,15 +131,17 @@ interface Component {
   components?: string[] // If it has nested components
 }
 
+export interface Status {
+  indicator: string
+  description: string
+}
+
 export interface StatusResponse {
   page: Page
   components: Component[]
   incidents: any[] // You might want to create a type for incidents as well
   scheduled_maintenances: any[] // Similarly, create a type for scheduled_maintenances
-  status: {
-    indicator: string
-    description: string
-  }
+  status: Status
 }
 
 export interface MinimalStatusResponse {
