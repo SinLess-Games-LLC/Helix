@@ -1,11 +1,6 @@
 {
   "extends": ["../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.base.json",
-    "extraFileExtensions": [".json", ".json5", ".jsonc"]
-  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -13,13 +8,18 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "import/export": "off"
-      }
+      "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
       "rules": {}
+    },
+    {
+      "files": ["*.json"],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        "@nx/dependency-checks": "error"
+      }
     }
   ]
 }

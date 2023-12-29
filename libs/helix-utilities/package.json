@@ -1,0 +1,12 @@
+{
+  "name": "@helix/helix-utilities",
+  "version": "0.0.1",
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "~16.0.3",
+    "tslib": "^2.6.2"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts"
+}

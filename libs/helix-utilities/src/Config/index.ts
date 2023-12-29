@@ -16,7 +16,6 @@ import { ConfigTwitchInterface } from './interfaces/Twitch.interface'
 import { ConfigLavalinkInterface } from './interfaces/Lavalink.interface'
 import { colors, errCodes } from './config.type'
 import { IntentsBitField } from 'discord.js'
-import * as process from 'process'
 dotenv.config()
 
 export class HelixConfiguration {
