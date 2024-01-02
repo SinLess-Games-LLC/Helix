@@ -14,28 +14,28 @@ import {
 @Entity()
 export class Image extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
   @Column({ type: 'text' })
-  fileName: string | undefined
+  fileName: string
 
   @Column({ type: 'text' })
   basePath?: string
 
   @Column({ type: 'text' })
-  url: string | undefined
+  url: string
 
   @Column({ type: 'int' })
-  size: number | undefined
+  size: number
 
   @Column('simple-array')
-  tags: string[] | undefined
+  tags: string[]
 
   @Column({ type: 'text' })
-  hash: string | undefined
+  hash: string
 
   @Column({ type: 'text' })
-  deleteHash: string | undefined
+  deleteHash: string
 }
 
 // ===========================================

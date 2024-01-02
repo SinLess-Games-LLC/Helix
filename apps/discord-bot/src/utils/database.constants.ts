@@ -13,7 +13,7 @@ export const HelixDataSource: DataSource = new DataSource({
   username: config.database.mysql.user.username,
   password: config.database.mysql.user.password,
   database: config.database.mysql.database.name,
-  charset: config.database.mysql.database.charset,
+  charset: 'utf8mb4', // config.database.mysql.database.charset,
   synchronize: true,
   entities: entities,
   logging: config.logging.enabled,

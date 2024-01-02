@@ -1,3 +1,7 @@
 export * from './Config'
 export * from './Logger'
 export * from './colors'
+export * from './colors.type'
+export * from './constants'
+export * from './functions'
+export * from './Errors'

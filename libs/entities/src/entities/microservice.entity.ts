@@ -11,53 +11,51 @@ import { UserProfile } from './user-profile.entity'
 import slugify from 'slugify'
 
 export interface MicroserviceInterface {
-  id: number | undefined
-  name: string | undefined
-  description: string | undefined
-  content: string | undefined
-  image: string | undefined
-  alt: string | undefined
-  added_by: number | undefined
-  slug: string | undefined
+  id: number
+  name: string
+  description: string
+  content: string
+  image: string
+  alt: string
+  added_by: number
+  slug: string
 }
 
 @Entity()
 export class Microservice {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
   @Column({ type: 'text' })
-  name: string | undefined
+  name: string
 
   @Column({ type: 'text' })
-  description: string | undefined
+  description: string
 
   @Column({ type: 'text' })
-  content: string | undefined
+  content: string
 
   @Column({ type: 'text' })
-  image: string | undefined
+  image: string
 
   @Column({ type: 'text' })
-  alt: string | undefined
+  alt: string
 
   @ManyToOne(() => UserProfile, userProfile => userProfile.microservices_added)
-  added_by: number | undefined
+  added_by: number
 
   @Column({ type: 'text' })
-  slug: string | undefined
+  slug: string
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 
   @BeforeInsert()
   generateSlug() {
-    if (typeof this.name === 'string') {
-      this.slug = slugify(this.name, '_')
-    }
+    this.slug = slugify(this.name, '_')
     return this.slug
   }
 }

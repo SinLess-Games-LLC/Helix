@@ -29,63 +29,63 @@ const transformer: Record<'date' | 'bigint', ValueTransformer> = {
 }
 
 export interface UserInterface {
-  id: number | undefined
-  uuid: string | undefined
+  id: number
+  uuid: string
   name: string | null
-  user_name: string | undefined
-  email: string | undefined
-  password: string | undefined
-  role: Role | undefined
-  profile_id: number | undefined
-  profile: UserProfileInterface | undefined
-  settings_id: number | undefined
-  settings: UserSettingInterface | undefined
-  updatedAt: Date | undefined
-  createdAt: Date | undefined
+  user_name: string
+  email: string
+  password: string
+  role: Role
+  profile_id: number
+  profile: UserProfileInterface
+  settings_id: number
+  settings: UserSettingInterface
+  updatedAt: Date
+  createdAt: Date
 }
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
   @Column('uuid')
-  uuid: string | undefined
+  uuid: string
 
   @Column({ type: 'varchar', nullable: true })
-  name: string | undefined
+  name: string
 
   @Column({ type: 'varchar', nullable: true })
-  user_name: string | undefined
+  user_name: string
 
   @Column('text')
-  email: string | undefined
+  email: string
 
   @Column({ type: 'varchar', nullable: true, transformer: transformer.date })
-  emailVerified: string | undefined
+  emailVerified: string
 
   @Column({ type: 'varchar', nullable: true })
-  image!: string | null
+  image!: string
 
   @Column('text')
-  password: string | undefined
+  password: string
 
   @Column({ type: 'enum', enum: Role, default: Role.User })
-  role: Role | undefined
+  role: Role
 
   @Column({ type: 'int', nullable: true })
-  profile_id: number | undefined
+  profile_id: number
 
   @OneToOne(() => UserProfile, { cascade: true, eager: true })
   @JoinColumn({ name: 'profile_id', referencedColumnName: 'id' })
-  profile: UserProfile | undefined
+  profile: UserProfile
 
   @Column({ type: 'int', nullable: true })
-  settings_id: number | undefined
+  settings_id: number
 
   @OneToOne(() => UserSetting, { cascade: true, eager: true })
   @JoinColumn({ name: 'settings_id', referencedColumnName: 'id' })
-  settings: UserSetting | undefined
+  settings: UserSetting
 
   @OneToMany(() => Session, session => session.userId)
   sessions!: Session[]
@@ -94,10 +94,10 @@ export class User {
   accounts!: Account[]
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 
   @BeforeInsert()
   generateUUID() {

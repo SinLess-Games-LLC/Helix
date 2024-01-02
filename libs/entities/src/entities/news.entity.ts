@@ -11,54 +11,52 @@ import {
 import slugify from 'slugify'
 
 export interface NewsInterface {
-  id: number | undefined
-  name: string | undefined
-  description: string | undefined
-  content: string | undefined
-  image: string | undefined
-  alt: string | undefined
-  slug: string | undefined
+  id: number
+  name: string
+  description: string
+  content: string
+  image: string
+  alt: string
+  slug: string
 }
 
 @Entity()
 export class News {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
   @Column('text')
-  name: string | undefined
+  name: string
 
   @Column('text')
-  description: string | undefined
+  description: string
 
   @Column('text')
-  content: string | undefined
+  content: string
 
   @Column('text')
-  image: string | undefined
+  image: string
 
   @Column('text')
-  alt: string | undefined
+  alt: string
 
   @Column('text')
-  slug: string | undefined
+  slug: string
 
   @ManyToOne(() => UserProfile, userProfile => userProfile.news_added, {
     cascade: true,
   })
-  added_by: number | undefined
+  added_by: number
 
   @UpdateDateColumn()
-  updated_at: Date | undefined
+  updated_at: Date
 
   @CreateDateColumn()
-  created_at: Date | undefined
+  created_at: Date
 
   @BeforeInsert()
   slugify() {
-    if (typeof this.name === 'string') {
-      this.slug = slugify(this.name, '_')
-    }
+    this.slug = slugify(this.name, '_')
     return this.slug
   }
 }

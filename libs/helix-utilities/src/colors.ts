@@ -1,3 +1,5 @@
+import { botColors } from './colors.type'
+
 export const colors = {
   reset: '\x1b[0m',
   bright: '\x1b[1m',
@@ -30,5 +32,24 @@ export const colors = {
     white: '\x1b[47m',
     gray: '\x1b[100m',
     crimson: '\x1b[48m',
+  },
+}
+
+export const BotColors: botColors = {
+  bot: {
+    blue: '#022371',
+    pink: '#f6066f',
+  },
+  company: {
+    gold: '#daa520',
+    silver: '#d1cfd0',
+    black: '#000000',
+  },
+  system: {
+    critical: '#FF0000',
+    error: '#EE4B2B',
+    warning: '#FFEA00',
+    info: '#0000FF',
+    success: '#00ff00',
   },
 }

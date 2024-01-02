@@ -17,24 +17,24 @@ import { Gender } from '../enums/gender.enum'
 import { Country } from '../enums/country.enum'
 
 export interface UserProfileInterface {
-  id: number | undefined
-  firstName: string | undefined
-  middleName: string | undefined
-  lastName: string | undefined
-  avatar: string | undefined
-  birthday: Date | undefined
-  sex: Sex | undefined
-  Gender: Gender | undefined
-  sexualOrientation?: Sexuality | undefined
-  Pronoun: Pronoun | undefined
-  country: Country | undefined
-  microservices_added: MicroserviceInterface[] | undefined
-  technologies_added: TechnologyInterface[] | undefined
-  news_added: NewsInterface[] | undefined
-  email_verified: boolean | undefined
-  age_verified: boolean | undefined
-  updatedAt: Date | undefined
-  createdAt: Date | undefined
+  id: number
+  firstName: string
+  middleName: string
+  lastName: string
+  avatar: string
+  birthday: Date
+  sex: Sex
+  Gender: Gender
+  sexualOrientation?: Sexuality
+  Pronoun: Pronoun
+  country: Country
+  microservices_added: MicroserviceInterface[]
+  technologies_added: TechnologyInterface[]
+  news_added: NewsInterface[]
+  email_verified: boolean
+  age_verified: boolean
+  updatedAt: Date
+  createdAt: Date
 }
 
 @Entity()
@@ -45,65 +45,65 @@ export interface UserProfileInterface {
  */
 export class UserProfile {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
   @Column({ type: 'text', nullable: true })
-  firstName: string | undefined
+  firstName: string
 
   @Column({ type: 'text', nullable: true })
-  middleName: string | undefined
+  middleName: string
 
   @Column({ type: 'text', nullable: true })
-  lastName: string | undefined
+  lastName: string
 
   @Column({ type: 'text', nullable: true })
-  avatar: string | undefined
+  avatar: string
 
   @Column({ type: 'text', nullable: true })
-  birthday: Date | undefined
+  birthday: Date
 
   @Column({ type: 'enum', enum: Sex, default: Sex.PreferNotToSay })
-  sex: Sex | undefined
+  sex: Sex
 
   @Column({ type: 'enum', enum: Gender, default: Gender.PreferNotToSay })
-  Gender: Gender | undefined
+  Gender: Gender
 
   @Column({ type: 'enum', enum: Sexuality, default: Sexuality.PreferNotToSay })
-  sexualOrientation?: Sexuality | undefined
+  sexualOrientation?: Sexuality
 
   @Column({ type: 'enum', enum: Pronoun, default: Pronoun.Other })
-  Pronoun: Pronoun | undefined
+  Pronoun: Pronoun
 
   @Column({ type: 'enum', enum: Country, default: Country.PreferNotToSay })
-  country: Country | undefined
+  country: Country
 
   @OneToMany(() => Microservice, microservice => microservice.added_by, {
     eager: true,
   })
   @JoinColumn()
-  microservices_added: Microservice[] | undefined
+  microservices_added: Microservice[]
 
   @OneToMany(() => Technology, technology => technology.added_by, {
     eager: true,
   })
   @JoinColumn()
-  technologies_added: Technology[] | undefined
+  technologies_added: Technology[]
 
   @OneToMany(() => News, news => news.added_by, {
     eager: true,
   })
   @JoinColumn()
-  news_added: News[] | undefined
+  news_added: News[]
 
   @Column({ type: 'boolean', default: false })
-  email_verified: boolean | undefined
+  email_verified: boolean
 
   @Column({ type: 'boolean', default: false })
-  age_verified: boolean | undefined
+  age_verified: boolean
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 }

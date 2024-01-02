@@ -14,16 +14,16 @@ import {
 @Entity()
 export class Pastebin extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string | undefined
+  id: string
 
   @Column({ type: 'text' })
-  editCode: string | undefined
+  editCode: string
 
   @Column({ type: 'int', default: -1 })
-  lifetime: number | undefined
+  lifetime: number
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date | undefined
+  createdAt: Date
 }
 
 // ===========================================

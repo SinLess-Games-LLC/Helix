@@ -2,11 +2,11 @@ import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'type
 
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn()
-  sid: number | undefined
+  sid: number
 
   @UpdateDateColumn()
-  updated_at: Date | undefined
+  updated_at: Date
 
   @CreateDateColumn()
-  created_at: Date | undefined
+  created_at: Date
 }

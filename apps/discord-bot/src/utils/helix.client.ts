@@ -1,8 +1,13 @@
 import { Client, ClientOptions, Collection, IntentsBitField, REST, Routes } from 'discord.js'
-import { HelixConfiguration, HelixLogger } from '@helix/helix-utilities'
+import {
+  BotColors,
+  botColors,
+  HelixConfiguration,
+  HelixLogger,
+  errCodes,
+  ErrorCodes,
+} from '@helix/helix-utilities'
 import express, { Express } from 'express'
-import { BotColors, ErrorCodes } from './bot.constants'
-import { botColors, errCodes } from '../typings/bot.types'
 import { RootRouter } from '../routers/root.router'
 import { CommandType } from '../typings/command.type'
 import * as path from 'path'
@@ -96,7 +101,7 @@ export class HelixClient extends Client {
   }
 
   private async _registerCommands(): Promise<void> {
-    await this._deleteCommands()
+    // await this._deleteCommands()
     try {
       this.commandLogger.info('Registering Commands')
       const commandFileDir: string = path.join(__dirname, '..', 'commands')
@@ -157,7 +162,7 @@ export class HelixClient extends Client {
       this.commandLogger.debug(`Commands: ${JSON.stringify(commands)}`)
 
       this.commandLogger.info('pushing commands to Discord')
-      await this._rest.put(Routes.applicationCommands('1143176646074052698'), { body: commands })
+      // await this._rest.put(Routes.applicationCommands('1143176646074052698'), { body: commands })
       this.commandLogger.info('Registered global commands')
     } catch (err) {
       this.commandLogger.error(`An error occurred while registering global commands: \n${err}`)

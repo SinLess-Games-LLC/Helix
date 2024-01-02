@@ -4,25 +4,25 @@ import { BaseEntity } from './base.entity'
 @Entity()
 export class DiscordGuild extends BaseEntity {
   @Column({ type: 'text' })
-  discord_id: string | undefined // snowflake	guild id
+  discord_id: string // snowflake	guild id
 
   @Column({ type: 'text' })
-  name: string | undefined // string	guild name (2-100 characters, excluding trailing and leading whitespace)
+  name: string // string	guild name (2-100 characters, excluding trailing and leading whitespace)
 
   @Column({ type: 'bigint' })
-  owner_id: number | undefined // snowflake	id of owner
+  owner_id: number // snowflake	id of owner
 
   @Column({ type: 'int' })
-  Channel_count: number | undefined // integer	total number of text channels and categories that the guild has
+  Channel_count: number // integer	total number of text channels and categories that the guild has
 
   @Column({ type: 'int' })
-  thread_count: number | undefined // integer	total number of threads that the guild has across all of its channels
+  thread_count: number // integer	total number of threads that the guild has across all of its channels
 
   @Column({ type: 'int' })
-  member_count: number | undefined // integer	total number of users in the guild
+  member_count: number // integer	total number of users in the guild
 
   @Column({ nullable: true, type: 'text' })
-  prefix: string | null | undefined // string	the prefix of the guild, used when invoking slash commands
+  prefix: string | null // string	the prefix of the guild, used when invoking slash commands
 
   @Column({ type: 'boolean' })
   deleted: boolean = false

@@ -11,44 +11,44 @@ import { DiscordWeeklyStatistics } from './weeklyStats.entity'
 @Entity()
 export class DiscordDailyStatistics {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
   @Column('int')
-  guildId: number | undefined
+  guildId: number
 
   @Column('int')
-  kicks: number | undefined
+  kicks: number
 
   @Column('int')
-  warnings: number | undefined
+  warnings: number
 
   @Column('int')
-  bans: number | undefined
+  bans: number
 
   @Column('int')
-  channels: number | undefined
+  channels: number
 
   @Column('int')
-  emojis: number | undefined
+  emojis: number
 
   @Column('int')
-  stickers: number | undefined
+  stickers: number
 
   @Column('int')
-  members: number | undefined
+  members: number
 
   @Column('int')
-  roles: number | undefined
+  roles: number
 
   @Column('int')
-  bots: number | undefined
+  bots: number
 
   @ManyToOne(() => DiscordWeeklyStatistics, weeklyStats => weeklyStats.dailyStats)
-  week: DiscordWeeklyStatistics | undefined
+  week: DiscordWeeklyStatistics
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 }

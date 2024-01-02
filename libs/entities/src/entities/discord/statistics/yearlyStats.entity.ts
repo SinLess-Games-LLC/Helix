@@ -11,17 +11,17 @@ import { DiscordMonthlyStatistics } from './monthlyStats.entity'
 @Entity()
 export class DiscordYearlyStatistics {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
   @Column('int')
-  year: number | undefined
+  year: number
 
   @ManyToOne(() => DiscordMonthlyStatistics, monthly => monthly.year)
-  month: DiscordMonthlyStatistics | undefined
+  month: DiscordMonthlyStatistics
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 }
