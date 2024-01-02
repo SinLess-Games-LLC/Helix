@@ -3,10 +3,6 @@ import * as trpcExpress from '@trpc/server/adapters/express'
 import { userRouter } from './User.route'
 import { TrpcService } from '@helix/trpc'
 
-interface _appRouter {
-  user: AppRouter
-}
-
 @Injectable()
 export class TrpcRouter {
   constructor(
@@ -18,11 +14,8 @@ export class TrpcRouter {
     user: this.userRouter,
   })
 
-  async applyMiddleware(app: INestApplication) {
-    app.use(
-      `/trpc`,
-      trpcExpress.createExpressMiddleware({ router: this.appRouter })
-    )
+  applyMiddleware(app: INestApplication) {
+    app.use(`/trpc`, trpcExpress.createExpressMiddleware({ router: this.appRouter }))
   }
 }
 

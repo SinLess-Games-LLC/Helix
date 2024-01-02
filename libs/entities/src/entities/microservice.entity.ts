@@ -11,56 +11,51 @@ import { UserProfile } from './user-profile.entity'
 import slugify from 'slugify'
 
 export interface MicroserviceInterface {
-  id: number | undefined
-  name: string | undefined
-  description: string | undefined
-  content: string | undefined
-  image: string | undefined
-  alt: string | undefined
-  added_by: number | undefined
-  slug: string | undefined
+  id: number
+  name: string
+  description: string
+  content: string
+  image: string
+  alt: string
+  added_by: number
+  slug: string
 }
 
 @Entity()
 export class Microservice {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
-  @Column()
-  name: string | undefined
+  @Column({ type: 'text' })
+  name: string
 
-  @Column('text')
-  description: string | undefined
+  @Column({ type: 'text' })
+  description: string
 
-  @Column('text')
-  content: string | undefined
+  @Column({ type: 'text' })
+  content: string
 
-  @Column()
-  image: string | undefined
+  @Column({ type: 'text' })
+  image: string
 
-  @Column()
-  alt: string | undefined
+  @Column({ type: 'text' })
+  alt: string
 
-  @ManyToOne(
-    () => UserProfile,
-    (userProfile) => userProfile.microservices_added
-  )
-  added_by: number | undefined
+  @ManyToOne(() => UserProfile, userProfile => userProfile.microservices_added)
+  added_by: number
 
-  @Column({ unique: true, default: '' })
-  slug: string | undefined
+  @Column({ type: 'text' })
+  slug: string
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 
   @BeforeInsert()
-  async generateSlug() {
-    if (typeof this.name === 'string') {
-      this.slug = slugify(this.name, '_')
-    }
+  generateSlug() {
+    this.slug = slugify(this.name, '_')
     return this.slug
   }
 }

@@ -3,7 +3,6 @@ version: '3'
 services:
   mysql:
     image: mysql:latest
-    container_name: dev_mysql
     restart: always
     ports:
       # <Port exposed> : < MySQL Port running inside container>

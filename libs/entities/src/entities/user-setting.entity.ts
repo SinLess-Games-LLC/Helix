@@ -1,18 +1,12 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 export interface UserSettingInterface {
-  id: number | undefined
-  newsletter: boolean | undefined
-  premium: boolean | undefined
-  twoFactorAuthentication: boolean | undefined
-  updatedAt: Date | undefined
-  createdAt: Date | undefined
+  id: number
+  newsletter: boolean
+  premium: boolean
+  twoFactorAuthentication: boolean
+  updatedAt: Date
+  createdAt: Date
 }
 
 @Entity()
@@ -22,20 +16,20 @@ export interface UserSettingInterface {
  */
 export class UserSetting {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
-  @Column({ default: false })
-  newsletter: boolean | undefined
+  @Column({ type: 'boolean', default: false })
+  newsletter: boolean
 
-  @Column({ default: false })
-  premium: boolean | undefined
+  @Column({ type: 'boolean', default: false })
+  premium: boolean
 
-  @Column({ default: false })
-  twoFactorAuthentication: boolean | undefined
+  @Column({ type: 'boolean', default: false })
+  twoFactorAuthentication: boolean
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 }

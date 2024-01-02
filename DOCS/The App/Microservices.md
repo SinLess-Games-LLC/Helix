@@ -53,7 +53,7 @@ The Helix AI app is built using a microservices architecture to promote modulari
 - Custom AI and ML models for natural language understanding.
 - Task execution engine for performing various user tasks.
 - Integration with databases for data storage and retrieval.
-- Data analysis libraries for generating insights.
+- DataEntity analysis libraries for generating insights.
 
 ## Code Companion
 

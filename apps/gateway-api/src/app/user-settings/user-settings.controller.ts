@@ -11,10 +11,7 @@ export class UserSettingsController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: number,
-    @Body() updateUserSettingDto: CreateUserSettingDto
-  ) {
+  update(@Param('id') id: number, @Body() updateUserSettingDto: CreateUserSettingDto) {
     return this.userSettingsService.update(+id, updateUserSettingDto)
   }
 }

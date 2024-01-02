@@ -29,75 +29,75 @@ const transformer: Record<'date' | 'bigint', ValueTransformer> = {
 }
 
 export interface UserInterface {
-  id: number | undefined
-  uuid: string | undefined
+  id: number
+  uuid: string
   name: string | null
-  user_name: string | undefined
-  email: string | undefined
-  password: string | undefined
-  role: Role | undefined
-  profile_id: number | undefined
-  profile: UserProfileInterface | undefined
-  settings_id: number | undefined
-  settings: UserSettingInterface | undefined
-  updatedAt: Date | undefined
-  createdAt: Date | undefined
+  user_name: string
+  email: string
+  password: string
+  role: Role
+  profile_id: number
+  profile: UserProfileInterface
+  settings_id: number
+  settings: UserSettingInterface
+  updatedAt: Date
+  createdAt: Date
 }
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number | undefined
+  id: number
 
-  @Column()
-  uuid: string | undefined
+  @Column('uuid')
+  uuid: string
 
   @Column({ type: 'varchar', nullable: true })
-  name: string | undefined
+  name: string
 
-  @Column({ nullable: true })
-  user_name: string | undefined
+  @Column({ type: 'varchar', nullable: true })
+  user_name: string
 
-  @Column()
-  email: string | undefined
+  @Column('text')
+  email: string
 
   @Column({ type: 'varchar', nullable: true, transformer: transformer.date })
-  emailVerified: string | undefined
+  emailVerified: string
 
   @Column({ type: 'varchar', nullable: true })
-  image!: string | null
+  image!: string
 
-  @Column()
-  password: string | undefined
+  @Column('text')
+  password: string
 
   @Column({ type: 'enum', enum: Role, default: Role.User })
-  role: Role | undefined
+  role: Role
 
-  @Column({ nullable: true })
-  profile_id: number | undefined
+  @Column({ type: 'int', nullable: true })
+  profile_id: number
 
   @OneToOne(() => UserProfile, { cascade: true, eager: true })
   @JoinColumn({ name: 'profile_id', referencedColumnName: 'id' })
-  profile: UserProfile | undefined
+  profile: UserProfile
 
-  @Column({ nullable: true })
-  settings_id: number | undefined
+  @Column({ type: 'int', nullable: true })
+  settings_id: number
 
   @OneToOne(() => UserSetting, { cascade: true, eager: true })
   @JoinColumn({ name: 'settings_id', referencedColumnName: 'id' })
-  settings: UserSetting | undefined
+  settings: UserSetting
 
-  @OneToMany(() => Session, (session) => session.userId)
+  @OneToMany(() => Session, session => session.userId)
   sessions!: Session[]
 
-  @OneToMany(() => Account, (account) => account.userId)
+  @OneToMany(() => Account, account => account.userId)
   accounts!: Account[]
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 
   @BeforeInsert()
   generateUUID() {

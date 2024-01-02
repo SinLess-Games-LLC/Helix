@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  OneToMany,
-  ValueTransformer,
-} from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ValueTransformer } from 'typeorm'
 import { User } from './user.entity'
 
 const transformer: Record<'date' | 'bigint', ValueTransformer> = {
@@ -27,13 +20,13 @@ export class Account {
   @Column({ type: 'uuid' })
   userId!: string
 
-  @Column()
+  @Column({ type: 'text' })
   type!: string
 
-  @Column()
+  @Column({ type: 'text' })
   provider!: string
 
-  @Column()
+  @Column({ type: 'text' })
   providerAccountId!: string
 
   @Column({ type: 'varchar', nullable: true })
@@ -67,7 +60,7 @@ export class Account {
   @Column({ type: 'varchar', nullable: true })
   oauth_token!: string | null
 
-  @ManyToOne(() => User, (user) => user.accounts, {
+  @ManyToOne(() => User, user => user.accounts, {
     createForeignKeyConstraints: true,
   })
   user!: User

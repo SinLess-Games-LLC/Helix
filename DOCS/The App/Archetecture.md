@@ -66,16 +66,16 @@ The database architecture is divided into two categories:
    - Transactions: ACID (Atomicity, Consistency, Isolation, Durability) properties are ensured for data integrity.
 
 2. **NoSQL Databases (MongoDB, Cassandra):**
-   - Collections (MongoDB) or Column Families (Cassandra): Data is stored in collections or column families, allowing flexibility in schema design.
+   - Collections (MongoDB) or Column Families (Cassandra): DataEntity is stored in collections or column families, allowing flexibility in schema design.
    - NoSQL Queries: Databases support NoSQL queries for unstructured or semi-structured data.
    - Scalability: Horizontal scaling is achieved to handle large datasets and high read/write loads.
-   - Data Replication: Replication strategies are implemented to ensure data availability and fault tolerance.
+   - DataEntity Replication: Replication strategies are implemented to ensure data availability and fault tolerance.
 
 ### In-Memory Caches (Redis)
 
 Redis is used for caching purposes:
 
-- **Caching Strategy:** Data that is frequently accessed or computationally expensive is cached in Redis.
+- **Caching Strategy:** DataEntity that is frequently accessed or computationally expensive is cached in Redis.
 - **Cache Invalidation:** Cache entries are set with expiration times or invalidated when the underlying data changes.
 - **Pub/Sub (Optional):** Redis Publish/Subscribe (Pub/Sub) can be implemented for real-time notifications and event broadcasting.
 

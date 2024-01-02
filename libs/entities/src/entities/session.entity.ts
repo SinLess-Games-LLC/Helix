@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  OneToMany,
-  ValueTransformer,
-} from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ValueTransformer } from 'typeorm'
 import { User } from './user.entity'
 
 const transformer: Record<'date' | 'bigint', ValueTransformer> = {
@@ -24,15 +17,15 @@ export class Session {
   @PrimaryGeneratedColumn('uuid')
   id!: string
 
-  @Column({ unique: true })
+  @Column({ type: 'text' })
   sessionToken!: string
 
   @Column({ type: 'uuid' })
   userId!: string
 
-  @Column({ transformer: transformer.date })
+  @Column({ type: 'text', transformer: transformer.date })
   expires!: string
 
-  @ManyToOne(() => User, (user) => user.sessions)
+  @ManyToOne(() => User, user => user.sessions)
   user!: User
 }

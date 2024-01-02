@@ -3,7 +3,15 @@ name: Open Pull Request on Git-Flow Branch
 on:
   push:
     branches:
-      - 'refs/heads/develop/*' # Adjust the branch pattern based on your git-flow configuration
+      - 'feature/*'
+      - 'bugfix/*'
+      - 'hotfix/*'
+      - 'release/*'
+      - 'support/*'
+      - 'develop'
+
+env:
+  GH_TOKEN: ${{ github.token }}
 
 jobs:
   open-pr:
@@ -18,7 +26,31 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Create Pull Request
+      - name: Extract branch name
         run: |
-          branch_name=$(echo "${{ github.ref }}" | cut -d'/' -f 4)
-          gh pr create --base develop --head "${branch_name}" --title "Merge ${branch_name} into develop"
+          branch_name=${GITHUB_REF#refs/heads/}
+          echo "Branch Name: $branch_name"
+
+      - name: Debugging
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "List files in the current directory: $(ls -a)"
+
+      - name: Install gh CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install gh
+
+      - name: Check if PR exists
+        id: check_pr
+        run: |
+          existing_prs=$(gh pr list --base develop --head "${branch_name}" --state open --json number)
+          if [ -n "$existing_prs" ]; then
+            echo "PR already exists for branch $branch_name. Skipping PR creation."
+            exit 0
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_pr.outcome != 'success'
+        run: |
+          gh pr create --base develop --head "${branch_name}" --title "${branch_name}" --body "This PR was automatically created by a GitHub Action."

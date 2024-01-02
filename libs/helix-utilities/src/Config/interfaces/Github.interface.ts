@@ -4,17 +4,20 @@
  * @interface ConfigGithubInterface
  */
 export interface ConfigGithubInterface {
-  /**
-   * The client ID for GitHub authentication.
-   *
-   * @type {string}
-   */
-  id: string
+  credentials: {
+    /**
+     * The client ID for GitHub authentication.
+     *
+     * @type {string}
+     */
+    id: string
 
-  /**
-   * The client secret for GitHub authentication.
-   *
-   * @type {string}
-   */
-  secret: string
+    /**
+     * The client secret for GitHub authentication.
+     *
+     * @type {string}
+     */
+    secret: string
+  }
+  gitRemoteRepo: string
 }

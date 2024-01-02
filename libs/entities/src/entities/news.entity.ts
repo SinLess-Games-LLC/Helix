@@ -11,54 +11,52 @@ import {
 import slugify from 'slugify'
 
 export interface NewsInterface {
-  id: number | undefined
-  name: string | undefined
-  description: string | undefined
-  content: string | undefined
-  image: string | undefined
-  alt: string | undefined
-  slug: string | undefined
+  id: number
+  name: string
+  description: string
+  content: string
+  image: string
+  alt: string
+  slug: string
 }
 
 @Entity()
 export class News {
   @PrimaryGeneratedColumn()
-  id: number | undefined
-
-  @Column()
-  name: string | undefined
+  id: number
 
   @Column('text')
-  description: string | undefined
+  name: string
 
   @Column('text')
-  content: string | undefined
+  description: string
 
-  @Column()
-  image: string | undefined
+  @Column('text')
+  content: string
 
-  @Column()
-  alt: string | undefined
+  @Column('text')
+  image: string
 
-  @Column()
-  slug: string | undefined
+  @Column('text')
+  alt: string
 
-  @ManyToOne(() => UserProfile, (userProfile) => userProfile.news_added, {
+  @Column('text')
+  slug: string
+
+  @ManyToOne(() => UserProfile, userProfile => userProfile.news_added, {
     cascade: true,
   })
-  added_by: number | undefined
+  added_by: number
 
   @UpdateDateColumn()
-  updated_at: Date | undefined
+  updated_at: Date
 
   @CreateDateColumn()
-  created_at: Date | undefined
+  created_at: Date
 
   @BeforeInsert()
-  async slugify() {
-    if (typeof this.name === 'string') {
-      this.slug = slugify(this.name, '_')
-    }
+  slugify() {
+    this.slug = slugify(this.name, '_')
     return this.slug
   }
 }

@@ -1,12 +1,31 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx", "prettier"],
-  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["@nx", "prettier", "@typescript-eslint", "import", "unicorn"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
   "overrides": [
+    {
+      "files": ["*.json"],
+      "rules": {
+        "quotes": ["error", "double"]
+      }
+    },
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "import/no-unresolved": "off",
+        "import/export": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
         "@nx/enforce-module-boundaries": [
           "error",
           {

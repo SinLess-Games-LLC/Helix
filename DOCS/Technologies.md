@@ -135,7 +135,7 @@ This document provides an overview of the technologies and tools used in the "He
   - **Use Case:** OpenAI's GPT models add AI capabilities such as chatbots and natural language understanding.
   - **Considerations:** Integrate AI models effectively and manage API usage.
 
-## Data Storage and Processing
+## DataEntity Storage and Processing
 
 ### Object Storage
 
@@ -143,7 +143,7 @@ This document provides an overview of the technologies and tools used in the "He
   - **Use Case:** Minio is an object storage server for self-hosted object storage.
   - **Considerations:** Set up buckets and manage object storage efficiently.
 
-### Data Processing
+### DataEntity Processing
 
 - **Apache Spark**
   - **Use Case:** Apache Spark is a distributed data processing framework for big data analytics.

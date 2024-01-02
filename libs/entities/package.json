@@ -2,6 +2,7 @@
   "name": "@helix/entities",
   "version": "0.0.1",
   "dependencies": {
+    "discord-api-types": "~0.37.38",
     "slugify": "^1.6.6",
     "tslib": "^2.6.2",
     "typeorm": "^0.3.17",

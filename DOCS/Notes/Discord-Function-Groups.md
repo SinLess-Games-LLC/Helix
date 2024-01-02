@@ -1,0 +1,83 @@
+# Discord Function Groups
+
+
+- [ ] Server Management
+  - [ ] Auto Delete
+  - [ ] Invites
+  - [ ] Bans
+  - [ ] Emojis
+  - [ ] Webhooks
+  - [ ] Welcome Messages
+  - [ ] Leave Messages
+  - [ ] Integrations
+  - [ ] Audit Logs
+  - [ ] AFK
+  - [ ] Server Widget
+  - [ ] Server Widget Image
+  - [ ] Vanity URL
+  - [ ] Welcome Screen
+  - [ ] Announcements
+  - [ ] Highlights
+  - [ ] Prune Members
+  - [ ] Starboard
+  - [ ] Events
+  - [ ] Forms
+  - [ ] Message Embedder
+  - [ ] Members
+    - [ ] Profile
+    - [ ] Nickname
+    - [ ] Roles
+    - [ ] Permissions
+    - [ ] Join Date
+  - [ ] Moderation
+    - [ ] Kick
+    - [ ] Ban
+    - [ ] Unban
+    - [ ] Soft-ban
+    - [ ] Permanent Ban
+    - [ ] Auto-ban
+    - [ ] Mute
+    - [ ] Auto Moderation
+    - [ ] Auto Purge
+  - [ ] Roles
+    - [ ] Auto-Role
+    - [ ] Reaction Role
+  - [ ] Channels
+    - [ ] Temp Channels
+    - [ ] Temp-Voice Channels
+- [ ] Music
+  - [ ] Connect
+  - [ ] Play
+  - [ ] Stop
+  - [ ] Pause
+  - [ ] Resume
+  - [ ] Skip
+  - [ ] Queue
+  - [ ] Now Playing
+  - [ ] Volume
+  - [ ] Loop
+  - [ ] Shuffle
+  - [ ] Repeat
+- [ ] Tuppers
+  - [ ] Add
+  - [ ] Remove
+  - [ ] List
+  - [ ] Clear
+  - [ ] Rename
+  - [ ] Edit
+  - [ ] Delete
+- [ ] Fun
+  - [ ] 8ball
+  - [ ] Coinflip
+  - [ ] Dice
+  - [ ] Auto-response
+- [ ] Social
+  - [ ] Twitch
+  - [ ] Twitter
+  - [ ] Reddit
+  - [ ] Instagram
+- [ ] Utility
+  - [X] Ping
+  - [X] Bot Invite
+- [ ] Owner
+  - [ ] Eval

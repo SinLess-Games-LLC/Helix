@@ -12,19 +12,19 @@ import { UserProfile } from './user-profile.entity'
 import slugify from 'slugify'
 
 export interface TechnologyInterface {
-  id: number | undefined
-  name: string | undefined
-  description: string | undefined
-  content: string | undefined
-  image: string | undefined
-  alt: string | undefined
-  category1: TechCategory | undefined
-  category2: TechCategory | undefined
-  website: string | undefined
-  slug: string | undefined
-  added_by: number | undefined
-  updatedAt: Date | undefined
-  createdAt: Date | undefined
+  id: number
+  name: string
+  description: string
+  content: string
+  image: string
+  alt: string
+  category1: TechCategory
+  category2: TechCategory
+  website: string
+  slug: string
+  added_by: number
+  updatedAt: Date
+  createdAt: Date
 }
 
 @Entity()
@@ -44,59 +44,57 @@ export interface TechnologyInterface {
  */
 export class Technology {
   @PrimaryGeneratedColumn()
-  id: number | undefined
-
-  @Column()
-  name: string | undefined
+  id: number
 
   @Column('text')
-  description: string | undefined
+  name: string
 
   @Column('text')
-  content: string | undefined
+  description: string
 
-  @Column()
-  image: string | undefined
+  @Column('text')
+  content: string
 
-  @Column()
-  alt: string | undefined
+  @Column('text')
+  image: string
+
+  @Column('text')
+  alt: string
 
   @Column({
     type: 'enum',
     enum: TechCategory,
     default: TechCategory.Other,
   })
-  category1: TechCategory | undefined
+  category1: TechCategory
 
   @Column({
     type: 'enum',
     enum: TechCategory,
     default: TechCategory.Other,
   })
-  category2: TechCategory | undefined
+  category2: TechCategory
 
-  @Column()
-  website: string | undefined
+  @Column('text')
+  website: string
 
-  @Column()
-  slug: string | undefined
+  @Column('text')
+  slug: string
 
-  @ManyToOne(() => UserProfile, (user) => user.technologies_added, {
+  @ManyToOne(() => UserProfile, user => user.technologies_added, {
     cascade: true,
   })
-  added_by: number | undefined
+  added_by: number
 
   @UpdateDateColumn()
-  updatedAt: Date | undefined
+  updatedAt: Date
 
   @CreateDateColumn()
-  createdAt: Date | undefined
+  createdAt: Date
 
   @BeforeInsert()
-  async generateSlug() {
-    if (typeof this.name === 'string') {
-      this.slug = slugify(this.name, '_')
-    }
+  generateSlug() {
+    this.slug = slugify(this.name, '_')
     return this.slug
   }
 }

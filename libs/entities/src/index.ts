@@ -1,3 +1,42 @@
+import { Microservice } from './entities/microservice.entity'
+import { News } from './entities/news.entity'
+import { Technology } from './entities/technology.entity'
+import { User } from './entities/user.entity'
+import { UserProfile } from './entities/user-profile.entity'
+import { UserSetting } from './entities/user-setting.entity'
+import { Account } from './entities/account.entity'
+import { Session } from './entities/session.entity'
+import {
+  DiscordGuild,
+  DiscordDailyStatistics,
+  DiscordUser,
+  DiscordWeeklyStatistics,
+  DiscordMonthlyStatistics,
+  DiscordYearlyStatistics,
+  Pastebin,
+  Image,
+} from './entities/discord'
+
+let entities
+export default entities = [
+  Microservice,
+  News,
+  Technology,
+  User,
+  UserProfile,
+  UserSetting,
+  Account,
+  Session,
+  DiscordGuild,
+  DiscordUser,
+  DiscordDailyStatistics,
+  DiscordWeeklyStatistics,
+  DiscordMonthlyStatistics,
+  DiscordYearlyStatistics,
+  Pastebin,
+  Image,
+]
+
 /**
  *  Entities
  */
@@ -10,6 +49,13 @@ export { UserProfile } from './entities/user-profile.entity'
 export { UserSetting } from './entities/user-setting.entity'
 export { Account } from './entities/account.entity'
 export { Session } from './entities/session.entity'
+export { DiscordGuild } from './entities/discord/guild.entity'
+export { DiscordUser } from './entities/discord/user.entity'
+export { DiscordDailyStatistics } from './entities/discord/statistics/dailyStats.entity'
+export { DiscordWeeklyStatistics } from './entities/discord/statistics/weeklyStats.entity'
+export { DiscordMonthlyStatistics } from './entities/discord/statistics/monthlyStats.entity'
+export { DiscordYearlyStatistics } from './entities/discord/statistics/yearlyStats.entity'
+export * from './entities/discord'
 
 /**
  * Interfaces

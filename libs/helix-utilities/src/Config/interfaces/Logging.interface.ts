@@ -4,6 +4,7 @@
  * @interface ConfigLoggingInterface
  */
 export interface ConfigLoggingInterface {
+  enabled: boolean
   /**
    * Location configuration for logging.
    *
