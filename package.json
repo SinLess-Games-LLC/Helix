@@ -61,7 +61,7 @@
     "fast-folder-size": "~1.7.1",
     "filesize": "^10.1.0",
     "fs": "~0.0.1-security",
-    "http-status-codes": "~2.2.0",
+    "http-status-codes": "~2.3.0",
     "image-hash": "~5.3.1",
     "imgur": "^1.0.2",
     "installoop": "^1.1.0",
