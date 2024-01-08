@@ -1,20 +1,20 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService, Response } from './app.service';
+import { Test, TestingModule } from '@nestjs/testing'
+import { AppController } from './app.controller'
+import { AppService, Response } from './app.service'
 
 describe('AppController', () => {
-  let appController: AppController;
-  let appService: AppService;
+  let appController: AppController
+  let appService: AppService
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [AppService],
-    }).compile();
+    }).compile()
 
-    appController = module.get<AppController>(AppController);
-    appService = module.get<AppService>(AppService);
-  });
+    appController = module.get<AppController>(AppController)
+    appService = module.get<AppService>(AppService)
+  })
 
   describe('getStatus', () => {
     it('should return the status from AppService', async () => {
@@ -35,19 +35,19 @@ describe('AppController', () => {
             position: 1,
           },
         ],
-      };
+      }
 
-      jest.spyOn(appService, 'getStatus').mockResolvedValue(mockStatus);
+      jest.spyOn(appService, 'getStatus').mockResolvedValue(mockStatus)
 
-      const result = await appController.getStatus();
+      const result = await appController.getStatus()
 
-      expect(result).toEqual(mockStatus);
-    });
-  });
+      expect(result).toEqual(mockStatus)
+    })
+  })
 
   // Add more test cases as needed
 
   afterEach(() => {
     // Add any cleanup logic if needed
-  });
-});
+  })
+})

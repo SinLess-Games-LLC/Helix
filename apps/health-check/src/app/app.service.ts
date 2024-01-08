@@ -37,7 +37,7 @@ export interface StatusResponse {
     url: string
     time_zone: string
     updated_at: string
-  },
+  }
   status: {
     indicator: string
     description: string
@@ -66,26 +66,26 @@ export class AppService {
   }
 
   formatDate(timestamp: string | number | Date) {
-    const date = new Date(timestamp);
+    const date = new Date(timestamp)
 
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); // Adding 1 because months are zero-based
-    const day = ('0' + date.getDate()).slice(-2);
-    const year = date.getFullYear();
-    let hours = ('0' + date.getHours()).slice(-2);
-    const minutes = ('0' + date.getMinutes()).slice(-2);
-    const seconds = ('0' + date.getSeconds()).slice(-2);
-    let period = 'AM';
+    const month = ('0' + (date.getMonth() + 1)).slice(-2) // Adding 1 because months are zero-based
+    const day = ('0' + date.getDate()).slice(-2)
+    const year = date.getFullYear()
+    let hours = ('0' + date.getHours()).slice(-2)
+    const minutes = ('0' + date.getMinutes()).slice(-2)
+    const seconds = ('0' + date.getSeconds()).slice(-2)
+    let period = 'AM'
 
     if (parseInt(hours) > 12) {
-      hours = ('0' + (parseInt(hours) - 12)).slice(-2);
-      period = 'PM';
+      hours = ('0' + (parseInt(hours) - 12)).slice(-2)
+      period = 'PM'
     }
 
     if (hours === '00') {
-      hours = '12';
+      hours = '12'
     }
 
-    return `[DATE] ${month}-${day}-${year} [TIME] ${hours}:${minutes}:${seconds} ${period}`;
+    return `[DATE] ${month}-${day}-${year} [TIME] ${hours}:${minutes}:${seconds} ${period}`
   }
 
   async getStatus(): Promise<Response> {
@@ -97,7 +97,7 @@ export class AppService {
       name: 'Helix Health Check',
       time: {
         raw: Date.now(),
-        formatted: this.formatDate(Date.now())
+        formatted: this.formatDate(Date.now()),
       },
       status: 'operational',
       components: [
@@ -106,16 +106,16 @@ export class AppService {
           priority: 3,
           name: 'Discord',
           status: discordStatus.status.description,
-          position: 1
+          position: 1,
         },
         {
           id: 'cloudflare',
           priority: 2,
           name: 'Cloudflare',
           status: cloudflareStatus.status.description,
-          position: 2
-        }
-      ]
+          position: 2,
+        },
+      ],
     }
   }
 }
