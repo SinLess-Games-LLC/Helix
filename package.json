@@ -134,7 +134,7 @@
     "@types/dateformat": "~5.0.0",
     "@types/express": "~4.17.17",
     "@types/jest": "^29.4.0",
-    "@types/node": "20.10.4",
+    "@types/node": "20.10.7",
     "@types/react": "18.2.42",
     "@types/react-dom": "18.2.17",
     "@types/react-is": "18.2.4",
