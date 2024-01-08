@@ -1,0 +1,57 @@
+{
+  "name": "health-check",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/health-check/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/health-check",
+        "main": "apps/health-check/src/main.ts",
+        "tsConfig": "apps/health-check/tsconfig.app.json",
+        "assets": ["apps/health-check/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/health-check/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "health-check:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "health-check:build:development"
+        },
+        "production": {
+          "buildTarget": "health-check:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/health-check/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/health-check/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

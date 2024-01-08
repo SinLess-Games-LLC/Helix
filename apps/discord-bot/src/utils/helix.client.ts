@@ -101,7 +101,7 @@ export class HelixClient extends Client {
   }
 
   private async _registerCommands(): Promise<void> {
-    // await this._deleteCommands()
+    await this._deleteCommands()
     try {
       this.commandLogger.info('Registering Commands')
       const commandFileDir: string = path.join(__dirname, '..', 'commands')
@@ -250,7 +250,7 @@ export class HelixClient extends Client {
        * Api
        */
       this.logger.info('Starting Helix API')
-      this.api.listen(this.config.discord.api.port || 3000)
+      this.api.listen(this.config.discord.api.port || 8001)
       this.logger.info('Helix API Started')
     } catch (err: unknown) {
       this.logger.critical('Failed to start Helix Client')

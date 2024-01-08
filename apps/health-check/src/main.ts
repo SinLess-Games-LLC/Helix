@@ -3,7 +3,6 @@
  * This is only a minimal backend to get started.
  */
 
-import 'reflect-metadata'
 import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 
@@ -13,16 +12,16 @@ const logger = new Logger('Main')
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-  const globalPrefix = 'api/v1/health'
+  const globalPrefix = 'api'
   app.setGlobalPrefix(globalPrefix)
-  const port = process.env.PORT || 8000
+  const port = process.env.PORT || 8002
   await app.listen(port)
   logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`)
 }
 
-bootstrap()
-  .then(() => Logger.log('🚀 Application bootstrapped', 'Bootstrap'))
-  .catch(err => {
-    logger.error(err)
-    process.exit(1)
-  })
+bootstrap().then(() => {
+  logger.log('🚀 Application is running')
+}).catch((err) => {
+  logger.error(err)
+  process.exit(1)
+})
