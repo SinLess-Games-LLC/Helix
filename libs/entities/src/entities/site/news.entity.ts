@@ -1,10 +1,5 @@
 import { UserProfile } from '../user'
-import {
-  BeforeInsert,
-  Column,
-  Entity,
-  ManyToOne,
-} from 'typeorm'
+import { BeforeInsert, Column, Entity, ManyToOne } from 'typeorm'
 import slugify from 'slugify'
 import { BaseEntity } from '../base.entity'
 

@@ -1,9 +1,4 @@
-import {
-  BeforeInsert,
-  Column,
-  Entity,
-  ManyToOne,
-} from 'typeorm'
+import { BeforeInsert, Column, Entity, ManyToOne } from 'typeorm'
 import { TechCategory } from '../../enums'
 import { UserProfile } from '../user'
 import slugify from 'slugify'

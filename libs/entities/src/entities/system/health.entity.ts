@@ -1,7 +1,6 @@
 import { BaseEntity } from '../base.entity'
 import { Column, Entity } from 'typeorm'
 
-
 @Entity()
 export class Health extends BaseEntity {
   @Column()

@@ -1,9 +1,4 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm'
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm'
 import { DiscordWeeklyStatistics } from './weeklyStats.entity'
 import { DiscordYearlyStatistics } from './yearlyStats.entity'
 import { BaseEntity } from '../../base.entity'

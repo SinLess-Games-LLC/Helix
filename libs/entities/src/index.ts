@@ -18,7 +18,6 @@ import {
   Health,
 } from './entities'
 
-
 export const entities = [
   Microservice,
   News,
@@ -36,7 +35,7 @@ export const entities = [
   DiscordYearlyStatistics,
   Pastebin,
   Image,
-  Health
+  Health,
 ]
 
 /**
@@ -60,7 +59,7 @@ export {
   DiscordYearlyStatistics,
   Pastebin,
   Image,
-  Health
+  Health,
 } from './entities'
 
 /**
@@ -74,19 +73,11 @@ export type {
   TechnologyInterface,
   UserInterface,
   UserProfileInterface,
-  UserSettingInterface
+  UserSettingInterface,
 } from './entities'
 
 /**
  * Enums
  */
 
-export {
-  Country,
-  Gender,
-  Pronoun,
-  Role,
-  Sex,
-  Sexuality,
-  TechCategory
-} from './enums'
+export { Country, Gender, Pronoun, Role, Sex, Sexuality, TechCategory } from './enums'

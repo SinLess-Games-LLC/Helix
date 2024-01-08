@@ -1,21 +1,13 @@
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm'
 import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-} from 'typeorm'
-import {
-  Microservice, MicroserviceInterface,
-  Technology, TechnologyInterface,
-  News, NewsInterface
+  Microservice,
+  MicroserviceInterface,
+  Technology,
+  TechnologyInterface,
+  News,
+  NewsInterface,
 } from '../site'
-import {
-  Sex,
-  Gender,
-  Sexuality,
-  Pronoun,
-  Country,
-} from '../../enums'
+import { Sex, Gender, Sexuality, Pronoun, Country } from '../../enums'
 import { BaseEntity } from '../base.entity'
 
 export interface UserProfileInterface {

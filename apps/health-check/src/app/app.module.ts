@@ -29,7 +29,7 @@ const config = new HelixConfiguration()
       metadataTableName: 'helix-orm-metadata',
     }),
     TypeOrmModule.forFeature(entities),
-    TrpcModule
+    TrpcModule,
   ],
   controllers: [AppController],
   providers: [AppService],

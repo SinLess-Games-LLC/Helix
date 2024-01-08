@@ -1,8 +1,4 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-} from 'typeorm'
+import { Column, Entity, ManyToOne } from 'typeorm'
 import { DiscordWeeklyStatistics } from './weeklyStats.entity'
 import { BaseEntity } from '../../base.entity'
 
