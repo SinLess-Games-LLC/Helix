@@ -90,7 +90,7 @@
     "rxjs": "^7.8.0",
     "saveqlite": "~1.1.2",
     "semver": "^7.4.0",
-    "shoukaku": "^3.4.2",
+    "shoukaku": "^4.0.0",
     "slugify": "^1.6.6",
     "styled-components": "6.1.6",
     "tslib": "^2.3.0",
