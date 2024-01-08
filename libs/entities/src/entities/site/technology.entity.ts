@@ -1,18 +1,16 @@
 import {
   BeforeInsert,
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm'
-import { TechCategory } from '../enums/tech-category.enum'
-import { UserProfile } from './user-profile.entity'
+import { TechCategory } from '../../enums'
+import { UserProfile } from '../user'
 import slugify from 'slugify'
+import { BaseEntity } from '../base.entity'
 
 export interface TechnologyInterface {
-  id: number
+  sid: number
   name: string
   description: string
   content: string
@@ -42,10 +40,7 @@ export interface TechnologyInterface {
  * - Cloud Providers
  * - etc.
  */
-export class Technology {
-  @PrimaryGeneratedColumn()
-  id: number
-
+export class Technology extends BaseEntity {
   @Column('text')
   name: string
 
@@ -85,12 +80,6 @@ export class Technology {
     cascade: true,
   })
   added_by: number
-
-  @UpdateDateColumn()
-  updatedAt: Date
-
-  @CreateDateColumn()
-  createdAt: Date
 
   @BeforeInsert()
   generateSlug() {

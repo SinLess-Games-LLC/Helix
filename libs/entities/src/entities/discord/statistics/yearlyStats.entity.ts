@@ -1,27 +1,17 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm'
 import { DiscordMonthlyStatistics } from './monthlyStats.entity'
+import { BaseEntity } from '../../base.entity'
 
 @Entity()
-export class DiscordYearlyStatistics {
-  @PrimaryGeneratedColumn()
-  id: number
+export class DiscordYearlyStatistics extends BaseEntity {
 
   @Column('int')
   year: number
 
   @ManyToOne(() => DiscordMonthlyStatistics, monthly => monthly.year)
   month: DiscordMonthlyStatistics
-
-  @UpdateDateColumn()
-  updatedAt: Date
-
-  @CreateDateColumn()
-  createdAt: Date
 }

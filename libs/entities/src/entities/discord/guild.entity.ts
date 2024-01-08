@@ -1,5 +1,5 @@
-import { Column, Entity, EntityRepository, Repository } from 'typeorm'
-import { BaseEntity } from './base.entity'
+import { Column, Entity } from 'typeorm'
+import { BaseEntity } from '../base.entity'
 
 @Entity()
 export class DiscordGuild extends BaseEntity {
@@ -29,20 +29,4 @@ export class DiscordGuild extends BaseEntity {
 
   @Column({ type: 'timestamp' })
   lastInteract: Date = new Date()
-}
-
-@EntityRepository(DiscordGuild)
-export class DiscordGuildRepository extends Repository<DiscordGuild> {
-  async updateLastInteract(guildId?: string): Promise<void> {
-    const guild = await this.findOne({ where: { discord_id: guildId } })
-
-    if (guild) {
-      guild.lastInteract = new Date()
-      await this.save(guild)
-    }
-  }
-
-  async getActiveGuilds(): Promise<DiscordGuild[]> {
-    return this.find({ where: { deleted: false } })
-  }
 }

@@ -1,20 +1,15 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm'
 import { DiscordDailyStatistics } from './dailyStats.entity'
 import { DiscordMonthlyStatistics } from './monthlyStats.entity'
+import { BaseEntity } from '../../base.entity'
 
 @Entity()
-export class DiscordWeeklyStatistics {
-  @PrimaryGeneratedColumn()
-  id: number
-
+export class DiscordWeeklyStatistics extends BaseEntity {
   @Column('int')
   week: number
 
@@ -23,10 +18,4 @@ export class DiscordWeeklyStatistics {
 
   @ManyToOne(() => DiscordMonthlyStatistics, month => month.weeklyStats)
   month: DiscordMonthlyStatistics
-
-  @UpdateDateColumn()
-  updatedAt: Date
-
-  @CreateDateColumn()
-  createdAt: Date
 }

@@ -1,17 +1,15 @@
 import {
   BeforeInsert,
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm'
-import { UserProfile } from './user-profile.entity'
+import { UserProfile } from '../user'
 import slugify from 'slugify'
+import { BaseEntity } from '../base.entity'
 
 export interface MicroserviceInterface {
-  id: number
+  sid: number
   name: string
   description: string
   content: string
@@ -22,10 +20,7 @@ export interface MicroserviceInterface {
 }
 
 @Entity()
-export class Microservice {
-  @PrimaryGeneratedColumn()
-  id: number
-
+export class Microservice extends BaseEntity {
   @Column({ type: 'text' })
   name: string
 
@@ -46,12 +41,6 @@ export class Microservice {
 
   @Column({ type: 'text' })
   slug: string
-
-  @UpdateDateColumn()
-  updatedAt: Date
-
-  @CreateDateColumn()
-  createdAt: Date
 
   @BeforeInsert()
   generateSlug() {

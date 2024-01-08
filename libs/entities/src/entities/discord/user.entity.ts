@@ -1,10 +1,7 @@
-import { Column, Entity, EntityRepository, Repository } from 'typeorm'
+import { Column, Entity } from 'typeorm'
 import { Snowflake } from 'discord-api-types/globals'
-import { BaseEntity } from './base.entity'
+import { BaseEntity } from '../base.entity'
 
-// ===========================================
-// ================= Entity ==================
-// ===========================================
 @Entity()
 export class DiscordUser extends BaseEntity {
   @Column({ unique: true, type: 'bigint' })
@@ -39,20 +36,4 @@ export class DiscordUser extends BaseEntity {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   lastInteract: Date
-}
-
-// ===========================================
-// =========== Custom Repository =============
-// ===========================================
-@EntityRepository(DiscordUser)
-export class UserRepository extends Repository<DiscordUser> {
-  async updateLastInteract(userId?: number): Promise<void> {
-    const id = userId?.toString()
-    const user = await this.findOneBy({ discord_id: id })
-
-    if (user) {
-      user.lastInteract = new Date()
-      await this.save(user)
-    }
-  }
 }

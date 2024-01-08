@@ -1,17 +1,15 @@
-import { UserProfile } from './user-profile.entity'
+import { UserProfile } from '../user'
 import {
   BeforeInsert,
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm'
 import slugify from 'slugify'
+import { BaseEntity } from '../base.entity'
 
 export interface NewsInterface {
-  id: number
+  sid: number
   name: string
   description: string
   content: string
@@ -21,10 +19,7 @@ export interface NewsInterface {
 }
 
 @Entity()
-export class News {
-  @PrimaryGeneratedColumn()
-  id: number
-
+export class News extends BaseEntity {
   @Column('text')
   name: string
 
@@ -47,12 +42,6 @@ export class News {
     cascade: true,
   })
   added_by: number
-
-  @UpdateDateColumn()
-  updated_at: Date
-
-  @CreateDateColumn()
-  created_at: Date
 
   @BeforeInsert()
   slugify() {

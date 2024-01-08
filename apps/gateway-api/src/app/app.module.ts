@@ -15,16 +15,7 @@ import { HelixConfiguration } from '@helix/helix-utilities'
 import { UserRouter } from './trpc/User.route'
 import { TrpcRouter } from './trpc/trpc.router'
 import { UserService } from './user/user.service'
-import {
-  Account,
-  Microservice,
-  News,
-  Session,
-  Technology,
-  User,
-  UserProfile,
-  UserSetting,
-} from '@helix/entities'
+import { entities } from '@helix/entities'
 
 const config = new HelixConfiguration()
 
@@ -46,16 +37,7 @@ const config = new HelixConfiguration()
       },
       metadataTableName: 'helix-orm-metadata',
     }),
-    TypeOrmModule.forFeature([
-      User,
-      UserSetting,
-      UserProfile,
-      Microservice,
-      Technology,
-      News,
-      Account,
-      Session,
-    ]),
+    TypeOrmModule.forFeature(entities),
     TrpcModule,
     AuthModule,
     MicroserviceModule,

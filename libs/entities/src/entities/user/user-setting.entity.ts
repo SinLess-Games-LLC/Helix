@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { Column, Entity } from 'typeorm'
+import { BaseEntity } from '../base.entity'
 
 export interface UserSettingInterface {
-  id: number
+  sid: number
   newsletter: boolean
   premium: boolean
   twoFactorAuthentication: boolean
@@ -14,10 +15,7 @@ export interface UserSettingInterface {
  * @class UserSetting
  * @description UserSetting entity
  */
-export class UserSetting {
-  @PrimaryGeneratedColumn()
-  id: number
-
+export class UserSetting extends BaseEntity {
   @Column({ type: 'boolean', default: false })
   newsletter: boolean
 
@@ -26,10 +24,4 @@ export class UserSetting {
 
   @Column({ type: 'boolean', default: false })
   twoFactorAuthentication: boolean
-
-  @UpdateDateColumn()
-  updatedAt: Date
-
-  @CreateDateColumn()
-  createdAt: Date
 }

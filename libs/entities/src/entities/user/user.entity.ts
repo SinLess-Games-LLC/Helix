@@ -1,21 +1,19 @@
 import {
   BeforeInsert,
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToMany,
   OneToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
   ValueTransformer,
 } from 'typeorm'
 import { UserProfile, UserProfileInterface } from './user-profile.entity'
 import { UserSetting, UserSettingInterface } from './user-setting.entity'
-import { Role } from '../enums/roles.enum'
+import { Role } from '../../enums'
 import { v4 as uuidv4 } from 'uuid'
 import { Account } from './account.entity'
 import { Session } from './session.entity'
+import { BaseEntity } from '../base.entity'
 
 const transformer: Record<'date' | 'bigint', ValueTransformer> = {
   date: {
@@ -45,10 +43,7 @@ export interface UserInterface {
 }
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number
-
+export class User extends BaseEntity {
   @Column('uuid')
   uuid: string
 
@@ -77,14 +72,14 @@ export class User {
   profile_id: number
 
   @OneToOne(() => UserProfile, { cascade: true, eager: true })
-  @JoinColumn({ name: 'profile_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'profile_id', referencedColumnName: 'sid' })
   profile: UserProfile
 
   @Column({ type: 'int', nullable: true })
   settings_id: number
 
   @OneToOne(() => UserSetting, { cascade: true, eager: true })
-  @JoinColumn({ name: 'settings_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'settings_id', referencedColumnName: 'sid' })
   settings: UserSetting
 
   @OneToMany(() => Session, session => session.userId)
@@ -92,12 +87,6 @@ export class User {
 
   @OneToMany(() => Account, account => account.userId)
   accounts!: Account[]
-
-  @UpdateDateColumn()
-  updatedAt: Date
-
-  @CreateDateColumn()
-  createdAt: Date
 
   @BeforeInsert()
   generateUUID() {

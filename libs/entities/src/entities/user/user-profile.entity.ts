@@ -1,23 +1,25 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm'
-import { Microservice, MicroserviceInterface } from './microservice.entity'
-import { Technology, TechnologyInterface } from './technology.entity'
-import { News, NewsInterface } from './news.entity'
-import { Sex } from '../enums/sex.enum'
-import { Sexuality } from '../enums/sexuality.enum'
-import { Pronoun } from '../enums/pronoun.enum'
-import { Gender } from '../enums/gender.enum'
-import { Country } from '../enums/country.enum'
+import {
+  Microservice, MicroserviceInterface,
+  Technology, TechnologyInterface,
+  News, NewsInterface
+} from '../site'
+import {
+  Sex,
+  Gender,
+  Sexuality,
+  Pronoun,
+  Country,
+} from '../../enums'
+import { BaseEntity } from '../base.entity'
 
 export interface UserProfileInterface {
-  id: number
+  sid: number
   firstName: string
   middleName: string
   lastName: string
@@ -43,10 +45,7 @@ export interface UserProfileInterface {
  * @description
  * A user profile is a collection of information about a user.
  */
-export class UserProfile {
-  @PrimaryGeneratedColumn()
-  id: number
-
+export class UserProfile extends BaseEntity {
   @Column({ type: 'text', nullable: true })
   firstName: string
 
@@ -100,10 +99,4 @@ export class UserProfile {
 
   @Column({ type: 'boolean', default: false })
   age_verified: boolean
-
-  @UpdateDateColumn()
-  updatedAt: Date
-
-  @CreateDateColumn()
-  createdAt: Date
 }

@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ValueTransformer } from 'typeorm'
+import { Entity, Column, ManyToOne, ValueTransformer } from 'typeorm'
 import { User } from './user.entity'
+import { BaseEntity } from '../base.entity'
 
 const transformer: Record<'date' | 'bigint', ValueTransformer> = {
   date: {
@@ -13,10 +14,7 @@ const transformer: Record<'date' | 'bigint', ValueTransformer> = {
 }
 
 @Entity({ name: 'accounts' })
-export class Account {
-  @PrimaryGeneratedColumn('uuid')
-  id!: string
-
+export class Account extends BaseEntity {
   @Column({ type: 'uuid' })
   userId!: string
 
