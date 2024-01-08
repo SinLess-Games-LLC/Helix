@@ -12,7 +12,7 @@ const logger = new Logger('Main')
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-  const globalPrefix = 'api'
+  const globalPrefix = 'api/v1/health'
   app.setGlobalPrefix(globalPrefix)
   const port = process.env.PORT || 8002
   await app.listen(port)

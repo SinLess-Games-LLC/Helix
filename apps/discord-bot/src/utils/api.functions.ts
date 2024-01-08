@@ -4,7 +4,7 @@ import {
   discordStatusSummaryUrl,
   discordStatusUrl,
   // requiredDiscordComponents,
-} from './bot.constants'
+} from '@helix/helix-utilities'
 import { HelixLogger } from '@helix/helix-utilities'
 import { MinimalStatusResponse, StatusResponse } from '../typings/status.types'
 
