@@ -35,21 +35,21 @@ export class UserService {
     return from(this.userRepository.find())
   }
 
-  findOne(id: number): Observable<User> {
+  findOne(sid: number): Observable<User> {
     return from(
       this.userRepository.findOne({
         where: {
-          id,
+          sid,
         },
       })
     )
   }
 
-  update(id: number, updateUserDto: UpdateUserDto): Observable<any> {
-    return from(this.userRepository.update(id, updateUserDto))
+  update(sid: number, updateUserDto: UpdateUserDto): Observable<any> {
+    return from(this.userRepository.update(sid, updateUserDto))
   }
 
-  remove(id: number): Observable<any> {
-    return from(this.userRepository.delete(id))
+  remove(sid: number): Observable<any> {
+    return from(this.userRepository.delete(sid))
   }
 }

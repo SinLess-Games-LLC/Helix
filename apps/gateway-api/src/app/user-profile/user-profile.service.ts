@@ -11,11 +11,11 @@ export class UserProfileService {
     @InjectRepository(UserProfile)
     private readonly userProfileRepository: Repository<UserProfile>
   ) {}
-  findOne(id: number) {
-    return from(this.userProfileRepository.findOne({ where: { id } }))
+  findOne(sid: number) {
+    return from(this.userProfileRepository.findOne({ where: { sid } }))
   }
 
-  update(id: number, updateUserProfileDto: userProfile) {
-    return from(this.userProfileRepository.update(id, updateUserProfileDto))
+  update(sid: number, updateUserProfileDto: userProfile) {
+    return from(this.userProfileRepository.update(sid, updateUserProfileDto))
   }
 }

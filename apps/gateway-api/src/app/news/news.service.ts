@@ -36,15 +36,15 @@ export class NewsService {
     return from(this.newsRepository.find())
   }
 
-  findOne(id: number) {
-    return from(this.newsRepository.findOne({ where: { id } }))
+  findOne(sid: number) {
+    return from(this.newsRepository.findOne({ where: { sid } }))
   }
 
-  update(id: number, updateNewsDto: UpdateNewsDto) {
-    return from(this.newsRepository.update(id, updateNewsDto))
+  update(sid: number, updateNewsDto: UpdateNewsDto) {
+    return from(this.newsRepository.update(sid, updateNewsDto))
   }
 
-  remove(id: number) {
-    return from(this.newsRepository.delete(id))
+  remove(sid: number) {
+    return from(this.newsRepository.delete(sid))
   }
 }

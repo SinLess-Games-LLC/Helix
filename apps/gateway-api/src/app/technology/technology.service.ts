@@ -36,15 +36,15 @@ export class TechnologyService {
     return from(this.technologyRepository.find())
   }
 
-  findOne(id: number) {
-    return from(this.technologyRepository.findOne({ where: { id: id } }))
+  findOne(sid: number) {
+    return from(this.technologyRepository.findOne({ where: { sid } }))
   }
 
-  update(id: number, updateTechnologyDto: UpdateTechnologyDto) {
-    return from(this.technologyRepository.update(id, updateTechnologyDto))
+  update(sid: number, updateTechnologyDto: UpdateTechnologyDto) {
+    return from(this.technologyRepository.update(sid, updateTechnologyDto))
   }
 
-  remove(id: number) {
-    return from(this.technologyRepository.delete(id))
+  remove(sid: number) {
+    return from(this.technologyRepository.delete(sid))
   }
 }

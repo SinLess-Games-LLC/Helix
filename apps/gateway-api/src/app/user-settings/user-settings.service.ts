@@ -11,11 +11,11 @@ export class UserSettingsService {
     @InjectRepository(UserSetting)
     private readonly userSettingRepository: Repository<UserSetting>
   ) {}
-  findOne(id: number) {
-    return from(this.userSettingRepository.findOne({ where: { id } }))
+  findOne(sid: number) {
+    return from(this.userSettingRepository.findOne({ where: { sid } }))
   }
 
-  update(id: number, updateUserSettingDto: UpdateUserSettingDto) {
-    return from(this.userSettingRepository.update({ id }, updateUserSettingDto))
+  update(sid: number, updateUserSettingDto: UpdateUserSettingDto) {
+    return from(this.userSettingRepository.update({ sid }, updateUserSettingDto))
   }
 }

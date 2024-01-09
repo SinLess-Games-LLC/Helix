@@ -39,15 +39,15 @@ export class MicroserviceService {
     return from(this.microserviceRepository.find())
   }
 
-  findOne(id: number) {
-    return from(this.microserviceRepository.findOne({ where: { id } }))
+  findOne(sid: number) {
+    return from(this.microserviceRepository.findOne({ where: { sid } }))
   }
 
-  update(id: number, updateMicroserviceDto: UpdateMicroserviceDto) {
-    return from(this.microserviceRepository.update({ id }, updateMicroserviceDto))
+  update(sid: number, updateMicroserviceDto: UpdateMicroserviceDto) {
+    return from(this.microserviceRepository.update({ sid }, updateMicroserviceDto))
   }
 
-  remove(id: number) {
-    return from(this.microserviceRepository.delete({ id }))
+  remove(sid: number) {
+    return from(this.microserviceRepository.delete({ sid }))
   }
 }
