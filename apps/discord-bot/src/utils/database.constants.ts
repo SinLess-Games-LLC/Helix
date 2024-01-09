@@ -1,5 +1,5 @@
 import { HelixLogger, HelixConfiguration } from '@helix/helix-utilities'
-import entities from '@helix/entities'
+import { entities } from '@helix/entities'
 import { DataSource } from 'typeorm'
 import { createClient } from 'redis'
 
