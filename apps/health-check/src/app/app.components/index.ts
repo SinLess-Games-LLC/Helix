@@ -11,7 +11,6 @@ const initializeComponents = async (): Promise<BaseComponent[]> => {
 
   const discordBotComponent = await createDiscordBotComponent()
 
-
   return [discordComponent, cloudflareComponent, mysqlComponent, discordBotComponent]
 }
 
