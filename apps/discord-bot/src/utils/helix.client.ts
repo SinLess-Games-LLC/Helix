@@ -50,7 +50,6 @@ export class HelixClient extends Client {
   >
 
   public _commands: CommandType[] = []
-  private _globalPrefix: string = '/api/v1'
   public readonly _token: string = this.config.discord.application.client.bot.token
   public readonly _prefix: string = 'h!'
   private readonly _rest: REST = new REST({ version: '9' }).setToken(this._token)
@@ -79,8 +78,6 @@ export class HelixClient extends Client {
   }
   private async _init() {
     try {
-      // set global prefix of api to /api/v1
-      this.api.settings.prefix = this._globalPrefix
       this.fetchRouters()
       // register commands
       await this._registerCommands()
@@ -96,8 +93,8 @@ export class HelixClient extends Client {
 
   private fetchRouters() {
     this.apiLogger.info('Fetching Routers')
-    this.api.use(this._globalPrefix, RootRouter)
-    this.api.use(this._globalPrefix, HealthRouter)
+    this.api.use(RootRouter)
+    this.api.use(HealthRouter)
   }
 
   private async _registerCommands(): Promise<void> {
@@ -252,9 +249,7 @@ export class HelixClient extends Client {
       this.logger.info('Starting Helix API')
       this.api.listen(this.config.discord.api.port || 8001)
       this.logger.info(
-        `Helix API Started \n http://localhost:${this.config.discord.api.port || 8001}/${
-          this._globalPrefix
-        }/`
+        `Helix API Started \n http://localhost:${this.config.discord.api.port || 8001}/`
       )
     } catch (err: unknown) {
       this.logger.critical('Failed to start Helix Client')
