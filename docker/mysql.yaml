@@ -8,9 +8,11 @@ services:
       # <Port exposed> : < MySQL Port running inside container>
       - '3306:3306'
     volumes:
-      - ../.data/mysql/helix_ai:/var/lib/mysql
+      - '../.data/mysql/helix_ai:/var/lib/mysql'
     environment:
       MYSQL_DATABASE: helix_ai
       MYSQL_USER: helix_ai
       MYSQL_PASSWORD: zdqJ5zYmDEn1L07iAbBx
       MYSQL_ROOT_PASSWORD: hkjsdhflkjdsghcxbnkzxhlknblchihgjm
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
