@@ -7,6 +7,7 @@ import { TrpcModule } from '@helix/trpc'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { entities } from '@helix/entities'
 import { HelixConfiguration } from '@helix/helix-utilities'
+import { DatabaseModule } from './database/database.module'
 
 const config = new HelixConfiguration()
 
@@ -30,6 +31,7 @@ const config = new HelixConfiguration()
     }),
     TypeOrmModule.forFeature(entities),
     TrpcModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
