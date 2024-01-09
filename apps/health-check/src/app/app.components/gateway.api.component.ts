@@ -7,14 +7,14 @@ async function getGatewayApiHealth() {
     .then(json => json.database)
 }
 
-export const createGatewayApiComponent = async () => {
+export const createGatewayApiComponent = async (position: number) => {
   const component: BaseComponent = {
     id: 'gateway-api',
     priority: Priority.MissionCritical,
     name: 'Gateway API',
     description: 'The API that serves as the gateway to the Helix ecosystem.',
     status: await getGatewayApiHealth(),
-    position: 5,
+    position: position,
   }
 
   return component

@@ -8,7 +8,7 @@ async function fetchDiscordStatus(): Promise<StatusResponse> {
   return await response.json()
 }
 
-export const createDiscordComponent = async () => {
+export const createDiscordComponent = async (position: number) => {
   const discordStatus = await fetchDiscordStatus()
 
   const DiscordComponent: BaseComponent = {
@@ -18,7 +18,7 @@ export const createDiscordComponent = async () => {
     description:
       'Discord is a proprietary freeware instant messaging and VoIP application and digital distribution platform designed for creating communities ranging from gamers to education and businesses.',
     status: discordStatus.status.description,
-    position: 1,
+    position: position,
   }
 
   return DiscordComponent

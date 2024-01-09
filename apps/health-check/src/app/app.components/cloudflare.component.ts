@@ -11,7 +11,7 @@ async function fetchCloudflareStatus(): Promise<StatusResponse> {
     })
 }
 
-export const createCloudflareComponent = async () => {
+export const createCloudflareComponent = async (position: number) => {
   const cloudflareStatus = await fetchCloudflareStatus()
 
   const CloudflareComponent: BaseComponent = {
@@ -21,7 +21,7 @@ export const createCloudflareComponent = async () => {
     description:
       'Cloudflare, Inc. is an American web infrastructure and website security company that provides content delivery network services, DDoS mitigation, Internet security, and distributed domain name server services.',
     status: cloudflareStatus.status.description,
-    position: 2,
+    position: position,
   }
 
   return CloudflareComponent

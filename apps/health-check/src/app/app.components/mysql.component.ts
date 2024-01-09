@@ -7,14 +7,14 @@ async function fetchMySQLStatus() {
     .then(json => json.database)
 }
 
-export const createMySQLComponent = async () => {
+export const createMySQLComponent = async (position: number) => {
   const component: BaseComponent = {
     id: 'mysql',
     priority: Priority.MissionCritical,
     name: 'MySQL',
     description: 'The MySQL database that stores all of the data for the Helix ecosystem.',
     status: await fetchMySQLStatus(),
-    position: 3,
+    position: position,
   }
 
   return component

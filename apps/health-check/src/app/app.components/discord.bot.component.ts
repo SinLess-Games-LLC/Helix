@@ -6,7 +6,7 @@ async function fetchDiscordBotStatus() {
   return await res.json()
 }
 
-export const createDiscordBotComponent = async () => {
+export const createDiscordBotComponent = async (position: number) => {
   const discordBotStatus = await fetchDiscordBotStatus()
 
   const DiscordBotComponent: BaseComponent = {
@@ -16,7 +16,7 @@ export const createDiscordBotComponent = async () => {
     description:
       'Discord Bot is a proprietary freeware instant messaging and VoIP application and digital distribution platform designed for creating communities ranging from gamers to education and businesses.',
     status: discordBotStatus.status.description,
-    position: 4,
+    position: position,
   }
 
   return DiscordBotComponent
