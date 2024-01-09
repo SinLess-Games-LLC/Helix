@@ -12,8 +12,6 @@ import { UserSettingsModule } from './user-settings/user-settings.module'
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { HelixConfiguration } from '@helix/helix-utilities'
-import { UserRouter } from './trpc/User.route'
-import { TrpcRouter } from './trpc/trpc.router'
 import { UserService } from './user/user.service'
 import { entities } from '@helix/entities'
 
@@ -48,6 +46,6 @@ const config = new HelixConfiguration()
     UserSettingsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, TrpcService, TrpcRouter, UserRouter, UserService],
+  providers: [AppService, TrpcService, UserService],
 })
 export class AppModule {}
