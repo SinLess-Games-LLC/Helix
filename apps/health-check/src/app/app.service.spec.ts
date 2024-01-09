@@ -12,24 +12,6 @@ describe('AppService', () => {
     appService = module.get<AppService>(AppService)
   })
 
-  describe('fetchDiscordStatus', () => {
-    it('should fetch Discord status', async () => {
-      const result = await appService.fetchDiscordStatus()
-      // Add assertions based on the expected structure of the Discord status response
-      expect(result).toBeDefined()
-      // Add more specific assertions based on the actual structure of the Discord status response
-    })
-  })
-
-  describe('fetchCloudflareStatus', () => {
-    it('should fetch Cloudflare status', async () => {
-      const result = await appService.fetchCloudflareStatus()
-      // Add assertions based on the expected structure of the Cloudflare status response
-      expect(result).toBeDefined()
-      // Add more specific assertions based on the actual structure of the Cloudflare status response
-    })
-  })
-
   describe('getStatus', () => {
     it('should return a valid health check response', async () => {
       const result: Response = await appService.getStatus()

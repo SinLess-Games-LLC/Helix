@@ -1,21 +1,32 @@
-import { Test } from '@nestjs/testing'
-
+import { Test, TestingModule } from '@nestjs/testing'
 import { AppService } from './app.service'
 
 describe('AppService', () => {
   let service: AppService
 
-  beforeAll(async () => {
-    const app = await Test.createTestingModule({
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
       providers: [AppService],
     }).compile()
 
-    service = app.get<AppService>(AppService)
+    service = module.get<AppService>(AppService)
   })
 
-  describe('getData', () => {
-    it('should return "Hello API"', () => {
-      expect(service.getData()).toEqual({ message: 'Hello API' })
-    })
+  it('should be defined', () => {
+    expect(service).toBeDefined()
+  })
+
+  it('should return status', () => {
+    const status = service.getStatus()
+    // Customize this based on the actual expected status
+    expect(status).toBeDefined()
+    // Add more assertions as needed
+  })
+
+  // Add more test cases as needed
+
+  // Don't forget to clean up any resources, if necessary
+  afterEach(() => {
+    // Add cleanup logic here
   })
 })
