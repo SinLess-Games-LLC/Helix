@@ -6,7 +6,7 @@ export class HealthController {
   constructor(private healthService: HealthService) {}
 
   @Get('/health')
-  getHealth(): Promise<{ database: string }> {
-    return this.healthService.getHealth()
+  async getHealth() {
+    return await this.healthService.getHealth()
   }
 }

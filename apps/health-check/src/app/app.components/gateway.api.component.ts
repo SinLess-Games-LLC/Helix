@@ -2,7 +2,7 @@ import { BaseComponent } from './base.component'
 import { Priority } from './priority.enum'
 
 async function getGatewayApiHealth() {
-  return fetch(`http://localhost:8000/api/v1/health`)
+  return fetch(`http://localhost:8000/health`)
     .then(response => response.json())
     .then(json => json.database)
 }

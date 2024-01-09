@@ -2,7 +2,7 @@ import { Priority } from './priority.enum'
 import { BaseComponent } from './base.component'
 
 async function fetchDiscordBotStatus() {
-  const res = await fetch('http://localhost:8001/api/v1/health')
+  const res = await fetch('http://localhost:8001/health')
   return await res.json()
 }
 
