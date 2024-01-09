@@ -1,8 +1,6 @@
-import {
-  Injectable,
-  // Logger
-} from '@nestjs/common'
-import { cloudflareStatusUrl, discordStatusUrl } from '@helix/helix-utilities'
+import { Injectable, Logger } from '@nestjs/common'
+import { Priority } from './app.components/priority.enum'
+import initializeComponents from './app.components'
 
 export interface Response {
   id: string
@@ -23,7 +21,7 @@ export interface Response {
      * 4 = Minor
      * 5 = Maintenance | Subsystem
      */
-    priority: 1 | 2 | 3 | 4 | 5
+    priority: Priority
     name: string
     status: string
     position: number
@@ -46,26 +44,10 @@ export interface StatusResponse {
 
 @Injectable()
 export class AppService {
-  // private logger = new Logger('AppService')
-  constructor() {}
-
-  async fetchDiscordStatus(): Promise<StatusResponse> {
-    return fetch(discordStatusUrl)
-      .then(res => res.json())
-      .then(res => {
-        return res
-      })
-  }
-
-  async fetchCloudflareStatus(): Promise<StatusResponse> {
-    return fetch(cloudflareStatusUrl)
-      .then(res => res.json())
-      .then(res => {
-        return res
-      })
-  }
+  private logger = new Logger('AppService')
 
   formatDate(timestamp: string | number | Date) {
+    this.logger.log(`Formatting date: ${timestamp}`)
     const date = new Date(timestamp)
 
     const month = ('0' + (date.getMonth() + 1)).slice(-2) // Adding 1 because months are zero-based
@@ -85,12 +67,19 @@ export class AppService {
       hours = '12'
     }
 
-    return `[DATE] ${month}-${day}-${year} [TIME] ${hours}:${minutes}:${seconds} ${period}`
+    const formattedDate = `[DATE] ${month}-${day}-${year} [TIME] ${hours}:${minutes}:${seconds} ${period}`
+    this.logger.log(`Formatted date: ${formattedDate}`)
+
+    return formattedDate
+  }
+
+  async fetchSystemStatus() {
+    return 'Operational'
   }
 
   async getStatus(): Promise<Response> {
-    const discordStatus: StatusResponse = await this.fetchDiscordStatus()
-    const cloudflareStatus: StatusResponse = await this.fetchCloudflareStatus()
+    const systemStatus: string = await this.fetchSystemStatus()
+    const components = await initializeComponents()
 
     return {
       id: 'health-check',
@@ -99,23 +88,8 @@ export class AppService {
         raw: Date.now(),
         formatted: this.formatDate(Date.now()),
       },
-      status: 'operational',
-      components: [
-        {
-          id: 'discord',
-          priority: 3,
-          name: 'Discord',
-          status: discordStatus.status.description,
-          position: 1,
-        },
-        {
-          id: 'cloudflare',
-          priority: 2,
-          name: 'Cloudflare',
-          status: cloudflareStatus.status.description,
-          position: 2,
-        },
-      ],
+      status: systemStatus,
+      components: components,
     }
   }
 }
