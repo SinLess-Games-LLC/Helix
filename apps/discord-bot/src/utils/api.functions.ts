@@ -1,24 +1,24 @@
 import { HelixLogger } from '@helix/helix-utilities'
-import axios, {  AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { MinimalStatusResponse } from '../typings/status.types'
 
 const logger = new HelixLogger({ name: 'api.functions' })
 
-const CloudflareStatusUrl: string  = 'https://www.cloudflarestatus.com/api/v2/status.json'
+const CloudflareStatusUrl: string = 'https://www.cloudflarestatus.com/api/v2/status.json'
 const DiscordStatusUrl: string = 'https://discordstatus.com/api/v2/status.json'
 
 export async function fetchDiscordStatus() {
-  logger.info(`Fetching Discord Status`);
+  logger.info(`Fetching Discord Status`)
 
-  let response: AxiosResponse<any, any>;
+  let response: AxiosResponse<any, any>
 
   try {
-    logger.debug(`Fetching Discord Status from ${DiscordStatusUrl}`);
-    response = await axios.get(DiscordStatusUrl);
-    logger.info(`Discord Status fetched successfully`);
-    return response.data;
+    logger.debug(`Fetching Discord Status from ${DiscordStatusUrl}`)
+    response = await axios.get(DiscordStatusUrl)
+    logger.info(`Discord Status fetched successfully`)
+    return response.data
   } catch (err) {
-    logger.critical(`Failed to fetch Discord Status`);
+    logger.critical(`Failed to fetch Discord Status`)
 
     if (err.isAxiosError) {
       // Handle Axios errors
@@ -26,37 +26,35 @@ export async function fetchDiscordStatus() {
         // Log individual errors in case of AggregateError
         err.errors.forEach((error: unknown, index: number) => {
           logger.error(`Error ${index + 1}: ${error}`)
-        });
+        })
       }
-      logger.error(`Axios error: ${err.toString()}`);
-    }
-
-    else if (err.errors) {
+      logger.error(`Axios error: ${err.toString()}`)
+    } else if (err.errors) {
       // Handle AggregateErrors
       err.errors.forEach((error: unknown, index: number) => {
-        logger.error(`Error ${index + 1}: ${error.toString()}`);
-      });
+        logger.error(`Error ${index + 1}: ${error.toString()}`)
+      })
     }
 
-    logger.error(err.toString());
+    logger.error(err.toString())
   }
 }
 
 export async function fetchCloudflareStatus(): Promise<MinimalStatusResponse> {
   try {
-    logger.info(`Fetching Cloudflare Status`);
+    logger.info(`Fetching Cloudflare Status`)
 
-    const response = await axios.get(CloudflareStatusUrl);
-    const cfStatus = response.data;
+    const response = await axios.get(CloudflareStatusUrl)
+    const cfStatus = response.data
 
-    logger.info(`Cloudflare Status fetched successfully`);
-    return cfStatus;
+    logger.info(`Cloudflare Status fetched successfully`)
+    return cfStatus
   } catch (err) {
-    logger.critical(`Failed to fetch Cloudflare Status`);
-    logger.error(err.toString());
+    logger.critical(`Failed to fetch Cloudflare Status`)
+    logger.error(err.toString())
 
     // Throw the error to propagate it further or handle it as needed
-    throw err;
+    throw err
   }
 }
 
@@ -105,7 +103,7 @@ export async function discordStatus() {
 }
 
 export async function cloudflareStatus() {
-  const cloudflareStatus= await fetchCloudflareStatus()
+  const cloudflareStatus = await fetchCloudflareStatus()
 
   return statusCompare(cloudflareStatus.status.description)
 }

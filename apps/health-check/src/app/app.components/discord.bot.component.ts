@@ -20,5 +20,4 @@ export const createDiscordBotComponent = async () => {
   }
 
   return DiscordBotComponent
-
 }

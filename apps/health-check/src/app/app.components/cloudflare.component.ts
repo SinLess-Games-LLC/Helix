@@ -25,5 +25,4 @@ export const createCloudflareComponent = async () => {
   }
 
   return CloudflareComponent
-
 }
