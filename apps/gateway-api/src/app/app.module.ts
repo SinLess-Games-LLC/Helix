@@ -14,6 +14,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { HelixConfiguration } from '@helix/helix-utilities'
 import { UserService } from './user/user.service'
 import { entities } from '@helix/entities'
+import { HealthModule } from './health/health.module'
+import { DatabaseModule } from './database/database.module'
 
 const config = new HelixConfiguration()
 
@@ -38,6 +40,8 @@ const config = new HelixConfiguration()
     TypeOrmModule.forFeature(entities),
     TrpcModule,
     AuthModule,
+    DatabaseModule,
+    HealthModule,
     MicroserviceModule,
     NewsModule,
     TechnologyModule,
