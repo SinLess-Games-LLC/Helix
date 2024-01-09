@@ -8,7 +8,7 @@ services:
       # <Port exposed> : < MySQL Port running inside container>
       - '3306:3306'
     volumes:
-      - ../.data/db:/var/lib/mysql
+      - ../.data/mysql/helix_ai:/var/lib/mysql
     environment:
       MYSQL_DATABASE: helix_ai
       MYSQL_USER: helix_ai
