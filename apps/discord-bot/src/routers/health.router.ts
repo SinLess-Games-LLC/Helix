@@ -15,8 +15,11 @@ const logger = new HelixLogger({ name: 'health.router' })
 
 // Wrap the module code in an async IIFE
 ;(async () => {
+  logger.info('Fetching status from Discord and Cloudflare')
   const ds = await discordStatus()
+  logger.info('Discord status fetched successfully')
   const cs = await cloudflareStatus()
+  logger.info('Cloudflare status fetched successfully')
 
   function checkSystemStatus(...systems: boolean[]) {
     const totalSystems = systems.length
@@ -39,10 +42,10 @@ const logger = new HelixLogger({ name: 'health.router' })
 
   HealthRouter.get('/health', (req, res) => {
     res.send({
-      Status: {
+      status: {
         indicator: '',
         description: checkSystemStatus(
-          helix.Database.isInitialized,
+          // helix.Database.isInitialized,
           helix.cache.isReady,
           helix.ready,
           statusCompareToBoolean(ds),
@@ -54,12 +57,13 @@ const logger = new HelixLogger({ name: 'health.router' })
         cloudflare: cs,
       },
       Helix: {
-        database: status(helix.Database.isInitialized),
+        // database: status(helix.Database.isInitialized),
         cache: status(helix.cache.isReady),
         bot: status(helix.ready),
       },
     })
   })
 })().catch((err: unknown) => {
+  logger.critical('An Error occurred in the health router')
   logger.error(err as string)
 })
