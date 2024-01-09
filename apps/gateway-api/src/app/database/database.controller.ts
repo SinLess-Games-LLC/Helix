@@ -5,7 +5,7 @@ import { DatabaseService } from './database.service'
 export class DatabaseController {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  @Get('/database/status')
+  @Get('/health/database/status')
   async getStatus() {
     return {
       database: await this.databaseService.checkDatabaseStatus(),
