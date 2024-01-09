@@ -58,8 +58,9 @@ services:
       - '8444:8444'
       - '8445:8445'
     volumes:
-      - ../.data/kong:/kong
+      - ./kong/kong.yml:/kong/declarative/kong.yml
     environment:
+      KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yml
       # Database settings
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
