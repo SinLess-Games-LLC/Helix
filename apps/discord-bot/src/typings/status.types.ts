@@ -38,8 +38,5 @@ export interface StatusResponse {
 
 export interface MinimalStatusResponse {
   page: Page
-  status: {
-    indicator: string
-    description: string
-  }
+  status: Status
 }
