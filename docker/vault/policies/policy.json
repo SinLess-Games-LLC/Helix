@@ -1,6 +1,6 @@
 {
   "path": {
-    "kv/data/app/*": {
+    "identity/oidc/token/oidc-role-1": {
       "policy": "read"
     }
   }

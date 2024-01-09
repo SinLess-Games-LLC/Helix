@@ -46,3 +46,4 @@ Thumbs.db
 # Next.js
 .next
 /.data/
+/docker/vault/vault-cluster-vault-2024-01-09T13_01_22.887Z.json
