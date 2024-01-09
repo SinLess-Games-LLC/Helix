@@ -251,7 +251,11 @@ export class HelixClient extends Client {
        */
       this.logger.info('Starting Helix API')
       this.api.listen(this.config.discord.api.port || 8001)
-      this.logger.info('Helix API Started')
+      this.logger.info(
+        `Helix API Started \n http://localhost:${this.config.discord.api.port || 8001}/${
+          this._globalPrefix
+        }/`
+      )
     } catch (err: unknown) {
       this.logger.critical('Failed to start Helix Client')
       this.logger.error(err as string)
